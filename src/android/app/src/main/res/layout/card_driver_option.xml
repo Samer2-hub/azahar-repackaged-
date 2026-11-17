@@ -35,7 +35,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/title"
-                style="@style/TextAppearance.Material3.TitleMedium"
+                style="@style/TextAppearance.Citra.TitleMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="none"
@@ -75,7 +75,7 @@
 
         <Button
             android:id="@+id/button_delete"
-            style="@style/Widget.Material3.Button.IconButton"
+            style="@style/Widget.Citra.IconButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"

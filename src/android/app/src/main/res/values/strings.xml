@@ -1150,4 +1150,18 @@
     <string name="update_check_channel_stable">Stable</string>
     <string name="update_check_channel_prerelease">Prerelease</string>
 
+    <!-- Game page (Twin Screen redesign) -->
+    <string name="game_page_stats">Stats</string>
+    <string name="game_page_details">Details</string>
+    <string name="game_page_manage">Manage</string>
+    <string name="game_page_last_played">Last played</string>
+    <string name="game_page_added">Added</string>
+    <string name="game_page_never">Never</string>
+    <string name="game_page_storage">Storage</string>
+    <string name="game_page_installed">Installed</string>
+    <string name="game_page_game_file">Game file</string>
+    <string name="game_page_compressed">Compressed</string>
+    <string name="game_page_yes">Yes</string>
+    <string name="game_page_no">No</string>
+
 </resources>

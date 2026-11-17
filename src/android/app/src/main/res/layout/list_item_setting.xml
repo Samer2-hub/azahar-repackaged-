@@ -34,7 +34,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_setting_name"
-                style="@style/TextAppearance.Material3.HeadlineMedium"
+                style="@style/TextAppearance.Citra.TitleMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="viewStart"
@@ -53,7 +53,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_setting_value"
-                style="@style/TextAppearance.Material3.LabelMedium"
+                style="@style/TextAppearance.Citra.LabelMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_small"
@@ -64,7 +64,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/message_use_global"
-                style="@style/TextAppearance.Material3.LabelMedium"
+                style="@style/TextAppearance.Citra.LabelMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"

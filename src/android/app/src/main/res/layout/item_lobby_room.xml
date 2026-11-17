@@ -5,10 +5,9 @@
     style="?attr/materialCardViewFilledStyle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="24dp"
+    android:layout_marginBottom="12dp"
     android:layout_marginHorizontal="12dp"
     android:background="?attr/selectableItemBackground"
-    android:backgroundTint="?attr/colorSurfaceVariant"
     android:clickable="true"
     android:focusable="true">
 
@@ -74,7 +73,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/game_name"
-                    style="@style/TextAppearance.Material3.LabelMedium"
+                    style="@style/TextAppearance.Citra.LabelMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"

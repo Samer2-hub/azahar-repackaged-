@@ -320,8 +320,12 @@ class GamesFragment : Fragment() {
         val spacingNavigationRail =
             resources.getDimensionPixelSize(R.dimen.spacing_navigation_rail)
 
+        // Twin Screen redesign: the header sits under the status bar, the list starts below it
+        binding.gamesHeader.updatePadding(
+            top = barInsets.top + resources.getDimensionPixelSize(R.dimen.spacing_medlarge)
+        )
         binding.gridGames.updatePadding(
-            top = barInsets.top + extraListSpacing,
+            top = resources.getDimensionPixelSize(R.dimen.spacing_small),
             bottom = barInsets.bottom + spacingNavigation + extraListSpacing
         )
 

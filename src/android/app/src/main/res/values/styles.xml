@@ -1,9 +1,399 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- ============ Type ============ -->
+    <style name="TextAppearance.Citra.DisplayLarge" parent="TextAppearance.Material3.DisplayLarge">
+        <item name="fontFamily">monospace</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextAppearance.Citra.DisplayMedium" parent="TextAppearance.Material3.DisplayMedium">
+        <item name="fontFamily">monospace</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextAppearance.Citra.DisplaySmall" parent="TextAppearance.Material3.DisplaySmall">
+        <item name="fontFamily">monospace</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextAppearance.Citra.HeadlineLarge" parent="TextAppearance.Material3.HeadlineLarge">
+        <item name="fontFamily">monospace</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.02</item>
+    </style>
+    <style name="TextAppearance.Citra.HeadlineMedium" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="fontFamily">monospace</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.02</item>
+    </style>
+    <style name="TextAppearance.Citra.HeadlineSmall" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="fontFamily">monospace</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:letterSpacing">0.02</item>
+    </style>
+    <!-- Toolbar / screen titles: monospace caps -->
+    <style name="TextAppearance.Citra.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
+        <item name="fontFamily">monospace</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:letterSpacing">0.08</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+    <!-- List item titles stay in sans for readability -->
+    <style name="TextAppearance.Citra.TitleMedium" parent="TextAppearance.Material3.TitleMedium">
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextAppearance.Citra.TitleSmall" parent="TextAppearance.Material3.TitleSmall">
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <!-- Buttons and labels: monospace -->
+    <style name="TextAppearance.Citra.LabelLarge" parent="TextAppearance.Material3.LabelLarge">
+        <item name="fontFamily">monospace</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.08</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+    <style name="TextAppearance.Citra.LabelMedium" parent="TextAppearance.Material3.LabelMedium">
+        <item name="fontFamily">monospace</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.08</item>
+    </style>
+    <style name="TextAppearance.Citra.LabelSmall" parent="TextAppearance.Material3.LabelSmall">
+        <item name="fontFamily">monospace</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.08</item>
+    </style>
+    <!-- Small caps-style meta line, e.g. "PUBLISHER / USA" -->
+    <style name="TextAppearance.Citra.Meta" parent="TextAppearance.Material3.LabelMedium">
+        <item name="fontFamily">monospace</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:letterSpacing">0.08</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
+    </style>
+    <!-- Section header inside lists, e.g. settings groups -->
+    <style name="TextAppearance.Citra.SectionHeader" parent="TextAppearance.Material3.LabelLarge">
+        <item name="fontFamily">monospace</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:letterSpacing">0.14</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+    <style name="TextAppearance.Citra.NavLabel" parent="TextAppearance.Material3.LabelMedium">
+        <item name="fontFamily">monospace</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:letterSpacing">0.12</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <!-- ============ Shapes ============ -->
+    <style name="ShapeAppearance.Citra.Corner.ExtraSmall" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">2dp</item>
+    </style>
+    <style name="ShapeAppearance.Citra.Corner.Small" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">4dp</item>
+    </style>
+    <style name="ShapeAppearance.Citra.Corner.Medium" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">6dp</item>
+    </style>
+    <style name="ShapeAppearance.Citra.Corner.Large" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+    <style name="ShapeAppearance.Citra.BottomSheet" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">8dp</item>
+        <item name="cornerSizeTopRight">8dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+
+    <!-- ============ Buttons ============ -->
+    <style name="Widget.Citra.Button" parent="Widget.Material3.Button">
+        <item name="cornerRadius">4dp</item>
+        <item name="strokeColor">?attr/citraStrokeColor</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="android:textAppearance">?attr/textAppearanceLabelLarge</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+    <style name="Widget.Citra.Button.Icon" parent="Widget.Material3.Button.Icon">
+        <item name="cornerRadius">4dp</item>
+        <item name="strokeColor">?attr/citraStrokeColor</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="android:textAppearance">?attr/textAppearanceLabelLarge</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+    <style name="Widget.Citra.Button.Unelevated" parent="Widget.Material3.Button.UnelevatedButton">
+        <item name="cornerRadius">4dp</item>
+        <item name="strokeColor">?attr/citraStrokeColor</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="android:textAppearance">?attr/textAppearanceLabelLarge</item>
+    </style>
+    <!-- "Tonal" buttons become cream panel buttons with an ink outline -->
+    <style name="Widget.Citra.Button.Tonal" parent="Widget.Material3.Button.TonalButton">
+        <item name="cornerRadius">4dp</item>
+        <item name="backgroundTint">?attr/citraPanelColor</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="iconTint">?attr/colorOnSurface</item>
+        <item name="strokeColor">?attr/citraStrokeColor</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="android:textAppearance">?attr/textAppearanceLabelLarge</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+    <style name="Widget.Citra.Button.Tonal.Icon" parent="Widget.Material3.Button.TonalButton.Icon">
+        <item name="cornerRadius">4dp</item>
+        <item name="backgroundTint">?attr/citraPanelColor</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="iconTint">?attr/colorOnSurface</item>
+        <item name="strokeColor">?attr/citraStrokeColor</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="android:textAppearance">?attr/textAppearanceLabelLarge</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+    <style name="Widget.Citra.Button.Elevated" parent="Widget.Material3.Button.ElevatedButton">
+        <item name="cornerRadius">4dp</item>
+        <item name="backgroundTint">?attr/citraPanelColor</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="iconTint">?attr/colorOnSurface</item>
+        <item name="strokeColor">?attr/citraStrokeColor</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="android:textAppearance">?attr/textAppearanceLabelLarge</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="elevation">0dp</item>
+    </style>
+    <style name="Widget.Citra.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="cornerRadius">4dp</item>
+        <item name="strokeColor">?attr/citraStrokeColor</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="iconTint">?attr/colorOnSurface</item>
+        <item name="android:textAppearance">?attr/textAppearanceLabelLarge</item>
+    </style>
+    <style name="Widget.Citra.Button.Text" parent="Widget.Material3.Button.TextButton">
+        <item name="cornerRadius">4dp</item>
+        <item name="android:textAppearance">?attr/textAppearanceLabelLarge</item>
+    </style>
+    <style name="Widget.Citra.Button.Text.Dialog" parent="Widget.Material3.Button.TextButton.Dialog">
+        <item name="cornerRadius">4dp</item>
+        <item name="android:textAppearance">?attr/textAppearanceLabelLarge</item>
+    </style>
+    <style name="Widget.Citra.IconButton" parent="Widget.Material3.Button.IconButton">
+        <item name="iconTint">?attr/colorOnSurface</item>
+    </style>
+    <style name="Widget.Citra.IconButton.FilledTonal" parent="Widget.Material3.Button.IconButton.Filled.Tonal">
+        <item name="cornerRadius">4dp</item>
+        <item name="backgroundTint">?attr/citraPanelColor</item>
+        <item name="iconTint">?attr/colorOnSurface</item>
+        <item name="strokeColor">?attr/citraStrokeColor</item>
+        <item name="strokeWidth">2dp</item>
+    </style>
+
+    <!-- ============ Cards ============ -->
+    <style name="Widget.Citra.Card" parent="Widget.Material3.CardView.Outlined">
+        <item name="cardBackgroundColor">?attr/citraPanelColor</item>
+        <item name="strokeColor">?attr/citraStrokeColor</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="cardCornerRadius">4dp</item>
+        <item name="cardElevation">0dp</item>
+    </style>
+    <style name="Widget.Citra.Card.Filled" parent="Widget.Material3.CardView.Filled">
+        <item name="cardBackgroundColor">?attr/citraPanelColor</item>
+        <item name="strokeColor">?attr/citraStrokeColor</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="cardCornerRadius">4dp</item>
+        <item name="cardElevation">0dp</item>
+    </style>
+    <style name="Widget.Citra.Card.Elevated" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardBackgroundColor">?attr/citraPanelColor</item>
+        <item name="strokeColor">?attr/citraStrokeColor</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="cardCornerRadius">4dp</item>
+        <item name="cardElevation">0dp</item>
+    </style>
+    <!-- Card whose look comes from a hard-shadow background drawable inside it -->
+    <style name="Widget.Citra.Card.Shadowed" parent="Widget.Material3.CardView.Outlined">
+        <item name="cardBackgroundColor">@android:color/transparent</item>
+        <item name="strokeWidth">0dp</item>
+        <item name="cardCornerRadius">4dp</item>
+        <item name="cardElevation">0dp</item>
+    </style>
+
+    <!-- ============ Navigation ============ -->
+    <style name="Widget.Citra.BottomNavigation" parent="Widget.Material3.BottomNavigationView">
+        <item name="android:background">@drawable/bg_citra_nav_band</item>
+        <item name="backgroundTint">@null</item>
+        <item name="itemIconTint">@color/citra_nav_icon</item>
+        <item name="itemTextColor">@color/citra_nav_text</item>
+        <item name="itemTextAppearanceActive">@style/TextAppearance.Citra.NavLabel</item>
+        <item name="itemTextAppearanceInactive">@style/TextAppearance.Citra.NavLabel</item>
+        <item name="itemActiveIndicatorStyle">@style/Widget.Citra.NavIndicator</item>
+        <item name="labelVisibilityMode">labeled</item>
+        <item name="elevation">0dp</item>
+    </style>
+    <style name="Widget.Citra.NavIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">?attr/colorPrimary</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.Citra.Corner.Small</item>
+    </style>
+    <style name="Widget.Citra.NavigationRail" parent="Widget.Material3.NavigationRailView">
+        <item name="android:background">@drawable/bg_citra_nav_rail</item>
+        <item name="backgroundTint">@null</item>
+        <item name="labelVisibilityMode">labeled</item>
+        <item name="itemIconTint">@color/citra_nav_icon</item>
+        <item name="itemTextColor">@color/citra_nav_text</item>
+        <item name="itemTextAppearanceActive">@style/TextAppearance.Citra.NavLabel</item>
+        <item name="itemTextAppearanceInactive">@style/TextAppearance.Citra.NavLabel</item>
+        <item name="itemActiveIndicatorStyle">@style/Widget.Citra.NavRailIndicator</item>
+    </style>
+    <style name="Widget.Citra.NavRailIndicator" parent="Widget.Material3.NavigationRailView.ActiveIndicator">
+        <item name="android:color">?attr/colorPrimary</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.Citra.Corner.Small</item>
+    </style>
+    <!-- In-game drawer -->
+    <style name="Widget.Citra.NavigationView" parent="Widget.Material3.NavigationView">
+        <item name="backgroundTint">?attr/citraPanelColor</item>
+        <item name="drawerLayoutCornerSize">0dp</item>
+        <item name="itemShapeAppearance">@style/ShapeAppearance.Citra.Corner.Small</item>
+        <item name="itemShapeFillColor">@color/citra_drawer_item_fill</item>
+        <item name="itemIconTint">@color/citra_drawer_item_content</item>
+        <item name="itemTextColor">@color/citra_drawer_item_content</item>
+        <item name="itemTextAppearance">@style/TextAppearance.Citra.TitleSmall</item>
+    </style>
+    <style name="Widget.Citra.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="titleTextAppearance">@style/TextAppearance.Citra.TitleLarge</item>
+    </style>
+    <style name="Widget.Citra.CollapsingToolbar.Medium" parent="Widget.Material3.CollapsingToolbar.Medium">
+        <item name="expandedTitleTextAppearance">@style/TextAppearance.Citra.HeadlineSmall</item>
+        <item name="collapsedTitleTextAppearance">@style/TextAppearance.Citra.TitleLarge</item>
+    </style>
+
+    <!-- ============ Controls ============ -->
+    <style name="Widget.Citra.Switch" parent="Widget.Material3.CompoundButton.MaterialSwitch">
+        <item name="trackTint">@color/citra_switch_track</item>
+        <item name="thumbTint">@color/citra_switch_thumb</item>
+        <item name="trackDecorationTint">@color/citra_switch_track_decoration</item>
+    </style>
     <style name="CitraSlider" parent="Widget.Material3.Slider">
         <item name="tickVisible">false</item>
         <item name="labelBehavior">gone</item>
+        <item name="thumbColor">?attr/colorPrimary</item>
+        <item name="thumbStrokeColor">?attr/citraStrokeColor</item>
+        <item name="thumbStrokeWidth">2dp</item>
+        <item name="trackColorActive">?attr/colorPrimary</item>
+        <item name="trackColorInactive">?attr/citraPanelAltColor</item>
+        <item name="trackHeight">8dp</item>
+    </style>
+    <style name="Widget.Citra.CheckBox" parent="Widget.Material3.CompoundButton.CheckBox">
+        <item name="buttonTint">@color/citra_check_tint</item>
+    </style>
+    <style name="Widget.Citra.RadioButton" parent="Widget.Material3.CompoundButton.RadioButton">
+        <item name="buttonTint">@color/citra_check_tint</item>
+    </style>
+    <style name="Widget.Citra.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/citra_input_stroke</item>
+        <item name="boxStrokeWidth">2dp</item>
+        <item name="boxStrokeWidthFocused">2dp</item>
+        <item name="boxCornerRadiusTopStart">4dp</item>
+        <item name="boxCornerRadiusTopEnd">4dp</item>
+        <item name="boxCornerRadiusBottomStart">4dp</item>
+        <item name="boxCornerRadiusBottomEnd">4dp</item>
+    </style>
+    <style name="Widget.Citra.TextInputLayout.Dropdown" parent="Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxStrokeColor">@color/citra_input_stroke</item>
+        <item name="boxStrokeWidth">2dp</item>
+        <item name="boxStrokeWidthFocused">2dp</item>
+        <item name="boxCornerRadiusTopStart">4dp</item>
+        <item name="boxCornerRadiusTopEnd">4dp</item>
+        <item name="boxCornerRadiusBottomStart">4dp</item>
+        <item name="boxCornerRadiusBottomEnd">4dp</item>
+    </style>
+    <style name="Widget.Citra.Chip" parent="Widget.Material3.Chip.Suggestion">
+        <item name="chipBackgroundColor">@color/citra_chip_bg</item>
+        <item name="chipStrokeColor">?attr/citraStrokeColor</item>
+        <item name="chipStrokeWidth">2dp</item>
+        <item name="chipCornerRadius">4dp</item>
+        <item name="android:textColor">@color/citra_chip_text</item>
+        <item name="android:textAppearance">@style/TextAppearance.Citra.LabelMedium</item>
+        <item name="checkedIconTint">?attr/colorOnPrimary</item>
+        <item name="chipIconTint">@color/citra_chip_text</item>
+        <item name="elevation">0dp</item>
+    </style>
+    <style name="Widget.Citra.LinearProgress" parent="Widget.Material3.LinearProgressIndicator">
+        <item name="trackThickness">8dp</item>
+        <item name="trackCornerRadius">0dp</item>
+        <item name="indicatorColor">?attr/colorPrimary</item>
+        <item name="trackColor">?attr/citraPanelAltColor</item>
+    </style>
+    <style name="Widget.Citra.CircularProgress" parent="Widget.Material3.CircularProgressIndicator">
+        <item name="trackThickness">5dp</item>
+        <item name="indicatorColor">?attr/colorPrimary</item>
+    </style>
+    <style name="Widget.Citra.FloatingActionButton" parent="Widget.Material3.FloatingActionButton.Primary">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.Citra.Corner.Small</item>
+        <item name="backgroundTint">?attr/colorPrimary</item>
+        <item name="tint">?attr/colorOnPrimary</item>
+        <item name="elevation">0dp</item>
+        <item name="hoveredFocusedTranslationZ">0dp</item>
+        <item name="pressedTranslationZ">0dp</item>
+    </style>
+    <style name="Widget.Citra.ExtendedFloatingActionButton" parent="Widget.Material3.ExtendedFloatingActionButton.Icon.Primary">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.Citra.Corner.Small</item>
+        <item name="backgroundTint">?attr/colorPrimary</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="iconTint">?attr/colorOnPrimary</item>
+        <item name="strokeColor">?attr/citraStrokeColor</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="android:textAppearance">?attr/textAppearanceLabelLarge</item>
+        <item name="elevation">0dp</item>
+    </style>
+    <style name="Widget.Citra.Divider" parent="Widget.Material3.MaterialDivider">
+        <item name="dividerColor">@color/citra_outlineVariant</item>
+        <item name="dividerThickness">2dp</item>
+    </style>
+    <style name="Widget.Citra.PopupMenu" parent="Widget.Material3.PopupMenu">
+        <item name="android:popupBackground">@drawable/bg_citra_popup</item>
+    </style>
+
+    <!-- ============ Dialogs and sheets ============ -->
+    <style name="ThemeOverlay.Citra.MaterialAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="alertDialogStyle">@style/MaterialAlertDialog.Citra</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.Citra.Button.Text.Dialog</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Widget.Citra.Button.Text.Dialog</item>
+        <item name="buttonBarNeutralButtonStyle">@style/Widget.Citra.Button.Text.Dialog</item>
+    </style>
+    <style name="MaterialAlertDialog.Citra" parent="MaterialAlertDialog.Material3">
+        <item name="shapeAppearance">@style/ShapeAppearance.Citra.Corner.Medium</item>
+        <item name="backgroundTint">?attr/citraPanelColor</item>
+    </style>
+    <style name="ThemeOverlay.Citra.BottomSheetDialog" parent="ThemeOverlay.Material3.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.Citra.BottomSheet</item>
+    </style>
+    <style name="Widget.Citra.BottomSheet" parent="Widget.Material3.BottomSheet.Modal">
+        <item name="backgroundTint">?attr/citraPanelColor</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.Citra.BottomSheet</item>
+    </style>
+    <style name="Widget.Citra.BottomSheet.DragHandle" parent="Widget.Material3.BottomSheet.DragHandle">
+        <item name="tint">?attr/colorOnSurfaceVariant</item>
     </style>
 
 </resources>

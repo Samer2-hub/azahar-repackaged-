@@ -32,7 +32,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/notice_text"
-                style="@style/TextAppearance.Material3.TitleLarge"
+                style="@style/TextAppearance.Citra.TitleLarge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -65,7 +65,7 @@
             style="?attr/materialCardViewFilledStyle"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            app:cardCornerRadius="28dp">
+            app:cardCornerRadius="4dp">
 
             <LinearLayout
                 android:id="@+id/search_container"
@@ -134,30 +134,27 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_recently_played"
-                style="@style/Widget.Material3.Chip.Suggestion.Elevated"
+                style="@style/Widget.Citra.Chip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="@string/search_recently_played"
-                app:chipCornerRadius="28dp" />
+                android:text="@string/search_recently_played" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_recently_added"
-                style="@style/Widget.Material3.Chip.Suggestion.Elevated"
+                style="@style/Widget.Citra.Chip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="@string/search_recently_added"
-                app:chipCornerRadius="28dp" />
+                android:text="@string/search_recently_added" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_installed"
-                style="@style/Widget.Material3.Chip.Suggestion.Elevated"
+                style="@style/Widget.Citra.Chip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="@string/search_installed"
-                app:chipCornerRadius="28dp" />
+                android:text="@string/search_installed" />
 
         </com.google.android.material.chip.ChipGroup>
 

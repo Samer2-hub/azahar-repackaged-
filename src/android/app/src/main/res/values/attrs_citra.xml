@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Twin Screen redesign: theme-level colors used by layouts and styles -->
+    <attr name="citraPanelColor" format="color|reference" />
+    <attr name="citraPanelAltColor" format="color|reference" />
+    <attr name="citraBandColor" format="color|reference" />
+    <attr name="citraOnBandColor" format="color|reference" />
+    <attr name="citraOnBandMutedColor" format="color|reference" />
+    <attr name="citraStrokeColor" format="color|reference" />
+    <attr name="citraShadowColor" format="color|reference" />
+</resources>

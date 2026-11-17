@@ -16,6 +16,7 @@ import android.graphics.drawable.Icon
 import android.net.Uri
 import android.os.SystemClock
 import android.text.TextUtils
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,6 +43,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import java.text.DateFormat
+import java.util.Date
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -230,7 +233,7 @@ class GameAdapter(
             binding.cardContents.setBackgroundColor(
                 MaterialColors.getColor(
                     binding.cardContents,
-                    R.attr.colorSurface
+                    R.attr.citraPanelColor
                 )
             )
 
@@ -500,16 +503,54 @@ class GameAdapter(
         val insertable = game.isInsertable
         val inserted = insertable && (preferences.getString("insertedCartridge", "") == game.path)
 
+        // Game page: labels reuse the existing (translated) strings without their trailing colon
+        fun label(id: Int): String = context.getString(id).trimEnd(':', ' ', '：')
+
         bottomSheetView.findViewById<TextView>(R.id.about_game_title).text = game.title
-        bottomSheetView.findViewById<TextView>(R.id.about_game_company).text = game.company
-        bottomSheetView.findViewById<TextView>(R.id.about_game_region).text =
-            context.getString(R.string.game_context_region) + " " + translateRegions(game.regions)
+        bottomSheetView.findViewById<TextView>(R.id.about_game_company).apply {
+            text = game.company
+            visibility = if (game.company.isEmpty()) View.GONE else View.VISIBLE
+        }
+        bottomSheetView.findViewById<TextView>(R.id.about_game_region).apply {
+            text = translateRegions(game.regions)
+            visibility = if (game.regions.isEmpty()) View.GONE else View.VISIBLE
+        }
+        bottomSheetView.findViewById<TextView>(R.id.about_game_filetype).apply {
+            text = game.fileType.uppercase()
+            visibility = if (game.fileType.isEmpty()) View.GONE else View.VISIBLE
+        }
+        bottomSheetView.findViewById<TextView>(R.id.about_game_id_label).text =
+            label(R.string.game_context_id)
         bottomSheetView.findViewById<TextView>(R.id.about_game_id).text =
-            context.getString(R.string.game_context_id) + " " + String.format("%016X", game.titleId)
-        bottomSheetView.findViewById<TextView>(R.id.about_game_filename).text =
-            context.getString(R.string.game_context_file) + " " + game.filename
-        bottomSheetView.findViewById<TextView>(R.id.about_game_filetype).text =
-            context.getString(R.string.game_context_type) + " " + game.fileType
+            String.format("%016X", game.titleId)
+        bottomSheetView.findViewById<TextView>(R.id.about_game_filename_label).text =
+            label(R.string.game_context_file)
+        bottomSheetView.findViewById<TextView>(R.id.about_game_filename).text = game.filename
+        bottomSheetView.findViewById<TextView>(R.id.about_game_storage).text =
+            context.getString(
+                if (game.isInstalled) R.string.game_page_installed else R.string.game_page_game_file
+            )
+        bottomSheetView.findViewById<TextView>(R.id.about_game_compressed).text =
+            context.getString(if (game.isCompressed) R.string.game_page_yes else R.string.game_page_no)
+
+        val lastPlayed = preferences.getLong(game.keyLastPlayedTime, 0L)
+        bottomSheetView.findViewById<TextView>(R.id.about_game_last_played).text =
+            if (lastPlayed == 0L) {
+                context.getString(R.string.game_page_never)
+            } else {
+                DateUtils.getRelativeTimeSpanString(
+                    lastPlayed,
+                    System.currentTimeMillis(),
+                    DateUtils.MINUTE_IN_MILLIS
+                )
+            }
+        val addedTime = preferences.getLong(game.keyAddedToLibraryTime, 0L)
+        bottomSheetView.findViewById<TextView>(R.id.about_game_added).text =
+            if (addedTime == 0L) {
+                "—"
+            } else {
+                DateFormat.getDateInstance(DateFormat.MEDIUM).format(Date(addedTime))
+            }
 
         val insertButton = bottomSheetView.findViewById<MaterialButton>(
             R.id.insert_cartridge_button
@@ -538,6 +579,8 @@ class GameAdapter(
             view.findNavController().navigate(action)
         }
 
+        bottomSheetView.findViewById<TextView>(R.id.about_game_playtime_label).text =
+            label(R.string.game_context_playtime)
         bottomSheetView.findViewById<TextView>(R.id.about_game_playtime).text =
             buildString {
                 val playTimeSeconds = NativeLibrary.playTimeManagerGetPlayTime(game.titleId)
@@ -552,11 +595,7 @@ class GameAdapter(
                     else -> "${seconds}s"
                 }
 
-                append(
-                    context.getString(R.string.game_context_playtime) +
-                        " " +
-                        readablePlayTime
-                )
+                append(readablePlayTime)
             }
 
         bottomSheetView.findViewById<MaterialButton>(R.id.game_shortcut).setOnClickListener {
@@ -744,6 +783,9 @@ class GameAdapter(
 
             dialog.show()
         }
+
+        // Game page: always open at full screen height
+        bottomSheetView.minimumHeight = context.resources.displayMetrics.heightPixels
 
         val bottomSheetBehavior = bottomSheetDialog.getBehavior()
         bottomSheetBehavior.skipCollapsed = true
