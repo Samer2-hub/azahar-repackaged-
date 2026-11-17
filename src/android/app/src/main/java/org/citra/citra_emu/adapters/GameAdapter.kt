@@ -526,12 +526,20 @@ class GameAdapter(
         bottomSheetView.findViewById<TextView>(R.id.about_game_filename_label).text =
             label(R.string.game_context_file)
         bottomSheetView.findViewById<TextView>(R.id.about_game_filename).text = game.filename
+        val storageText = if (game.isInstalled) {
+            R.string.game_page_installed
+        } else {
+            R.string.game_page_game_file
+        }
         bottomSheetView.findViewById<TextView>(R.id.about_game_storage).text =
-            context.getString(
-                if (game.isInstalled) R.string.game_page_installed else R.string.game_page_game_file
-            )
+            context.getString(storageText)
+        val compressedText = if (game.isCompressed) {
+            R.string.game_page_yes
+        } else {
+            R.string.game_page_no
+        }
         bottomSheetView.findViewById<TextView>(R.id.about_game_compressed).text =
-            context.getString(if (game.isCompressed) R.string.game_page_yes else R.string.game_page_no)
+            context.getString(compressedText)
 
         val lastPlayed = preferences.getLong(game.keyLastPlayedTime, 0L)
         bottomSheetView.findViewById<TextView>(R.id.about_game_last_played).text =
