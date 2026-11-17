@@ -4,7 +4,6 @@
 
 package org.citra.citra_emu.adapters
 
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.ShortcutInfo
