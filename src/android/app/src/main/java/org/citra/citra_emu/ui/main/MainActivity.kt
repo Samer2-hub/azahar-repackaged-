@@ -203,6 +203,8 @@ class MainActivity :
         }
 
         setInsets()
+        // Nebula redesign: the floating navigation handles its own spacing (see setInsets)
+        ViewCompat.setOnApplyWindowInsetsListener(binding.navigationView) { _, insets -> insets }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -350,7 +352,7 @@ class MainActivity :
 
                 if (smallLayout) {
                     binding.navigationView.translationY =
-                        binding.navigationView.height.toFloat() * 2
+                        binding.navigationView.height.toFloat() * 3
                     translationY(0f)
                 } else {
                     if (binding.navigationView.layoutDirection ==
@@ -370,7 +372,7 @@ class MainActivity :
                 interpolator = PathInterpolator(0.3f, 0f, 0.8f, 0.15f)
 
                 if (smallLayout) {
-                    translationY(binding.navigationView.height.toFloat() * 2)
+                    translationY(binding.navigationView.height.toFloat() * 3)
                 } else {
                     if (binding.navigationView.layoutDirection ==
                         View.LAYOUT_DIRECTION_LTR
@@ -421,6 +423,17 @@ class MainActivity :
         val mlpNavShade = binding.navigationBarShade.layoutParams as MarginLayoutParams
         mlpNavShade.height = insets.bottom
         binding.navigationBarShade.layoutParams = mlpNavShade
+
+        // Nebula redesign: the navigation is a floating pill, kept clear of the system bars
+        val cutout = windowInsets.getInsets(WindowInsetsCompat.Type.displayCutout())
+        val navGap = resources.getDimensionPixelSize(R.dimen.nebula_nav_gap)
+        val mlpNav = binding.navigationView.layoutParams as MarginLayoutParams
+        if (resources.getBoolean(R.bool.small_layout)) {
+            mlpNav.bottomMargin = insets.bottom + navGap
+        } else {
+            mlpNav.marginStart = maxOf(insets.left, cutout.left) + navGap
+        }
+        binding.navigationView.layoutParams = mlpNav
 
         windowInsets
     }

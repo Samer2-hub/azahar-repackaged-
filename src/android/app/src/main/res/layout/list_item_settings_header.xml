@@ -6,18 +6,19 @@
     android:orientation="vertical"
     android:focusable="false"
     android:clickable="false"
-    android:padding="16dp">
+    android:paddingHorizontal="16dp"
+    android:paddingTop="24dp"
+    android:paddingBottom="8dp">
 
 <com.google.android.material.textview.MaterialTextView
 
     android:id="@+id/text_header_name"
-    style="@style/TextAppearance.Material3.TitleSmall"
+    style="@style/TextAppearance.Nebula.Overline"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="start|center_vertical"
     android:textAlignment="viewStart"
     android:textColor="?attr/colorPrimary"
-    android:textStyle="bold"
     tools:text="CPU Settings" />
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text_header_description"

@@ -58,7 +58,7 @@
                 android:orientation="vertical">
 
                 <com.google.android.material.textview.MaterialTextView
-                    style="@style/TextAppearance.Material3.TitleMedium"
+                    style="@style/TextAppearance.Nebula.TitleMedium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="24dp"
@@ -91,7 +91,7 @@
                 android:orientation="vertical">
 
                 <com.google.android.material.textview.MaterialTextView
-                    style="@style/TextAppearance.Material3.TitleMedium"
+                    style="@style/TextAppearance.Nebula.TitleMedium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="24dp"
@@ -124,7 +124,7 @@
                 android:orientation="vertical">
 
                 <com.google.android.material.textview.MaterialTextView
-                    style="@style/TextAppearance.Material3.TitleMedium"
+                    style="@style/TextAppearance.Nebula.TitleMedium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="24dp"
@@ -157,7 +157,7 @@
                 android:orientation="vertical">
 
                 <com.google.android.material.textview.MaterialTextView
-                    style="@style/TextAppearance.Material3.TitleMedium"
+                    style="@style/TextAppearance.Nebula.TitleMedium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="24dp"

@@ -1,89 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Nebula: a game in the library grid (art + title) -->
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="?attr/materialCardViewOutlinedStyle"
+    style="@style/Widget.Nebula.Card.Plain"
     android:id="@+id/card_game"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:background="?attr/selectableItemBackground"
+    android:layout_marginHorizontal="7dp"
+    android:layout_marginBottom="14dp"
     android:clickable="true"
     android:focusable="true"
-    app:cardCornerRadius="8dp"
-    tools:layout_width="match_parent">
+    app:cardCornerRadius="18dp"
+    tools:layout_width="120dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/card_contents"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="8dp">
+        android:layout_height="wrap_content">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/image_game_screen"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:importantForAccessibility="no"
+            android:scaleType="centerCrop"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearance="@style/ShapeAppearance.Nebula.Corner.Large" />
 
         <ImageView
             android:id="@+id/image_cartridge"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_margin="6dp"
+            android:contentDescription="@string/game_context_eject"
             android:src="@drawable/cartridge"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintEnd_toEndOf="@+id/image_game_screen"
+            app:layout_constraintTop_toTopOf="@+id/image_game_screen" />
 
+        <TextView
+            android:id="@+id/text_game_title"
+            style="@style/TextAppearance.Nebula.Body"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:paddingBottom="2dp"
+            android:ellipsize="none"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:requiresFadingEdge="horizontal"
+            android:singleLine="true"
+            android:textAlignment="viewStart"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="12.5sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_game_screen"
+            tools:text="Lantern Woods" />
+
+        <!-- Publisher and region are shown on the game page, not on the tile -->
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center_vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/image_game_screen"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/text_game_title"
-                style="@style/TextAppearance.Material3.BodyMedium"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="viewStart"
-                android:singleLine="true"
-                android:marqueeRepeatLimit="marquee_forever"
-                android:ellipsize="none"
-                android:requiresFadingEdge="horizontal"
-                tools:text="The Legend of Zelda\nOcarina of Time 3D" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_game_title">
 
             <TextView
                 android:id="@+id/text_company"
-                style="@style/TextAppearance.Material3.BodySmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAlignment="viewStart"
-                android:singleLine="true"
-                android:marqueeRepeatLimit="marquee_forever"
-                android:ellipsize="none"
-                android:requiresFadingEdge="horizontal"
-                tools:text="Nintendo" />
+                android:singleLine="true" />
 
             <TextView
                 android:id="@+id/text_game_region"
-                style="@style/TextAppearance.Material3.BodySmall"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAlignment="viewStart"
-                android:singleLine="true"
-                android:marqueeRepeatLimit="marquee_forever"
-                android:ellipsize="none"
-                android:requiresFadingEdge="horizontal"
-                tools:text="Region" />
+                android:singleLine="true" />
 
         </LinearLayout>
 

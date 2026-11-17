@@ -21,16 +21,19 @@
         app:navGraph="@navigation/home_navigation"
         tools:layout="@layout/fragment_games" />
 
+    <!-- Nebula: floating glass rail (start margin is set from code) -->
     <com.google.android.material.navigationrail.NavigationRailView
         android:id="@+id/navigation_view"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="8dp"
         android:visibility="invisible"
+        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:labelVisibilityMode="selected"
         app:menu="@menu/menu_navigation"
+        app:menuGravity="center"
         tools:visibility="visible" />
 
     <View

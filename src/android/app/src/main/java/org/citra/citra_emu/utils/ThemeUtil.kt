@@ -5,7 +5,6 @@
 package org.citra.citra_emu.utils
 
 import android.content.SharedPreferences
-import android.content.res.Configuration
 import android.graphics.Color
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
@@ -49,46 +48,20 @@ object ThemeUtil {
             activity.setTheme(getSelectedStaticThemeColor())
         }
 
-        // Using a specific night mode check because this could apply incorrectly when using the
-        // light app mode, dark system mode, and black backgrounds. Launching the settings activity
-        // will then show light mode colors/navigation bars but with black backgrounds.
-        if (preferences.getBoolean(CitraSettings.PREF_BLACK_BACKGROUNDS, false) &&
-            isNightMode(activity)
-        ) {
+        // Nebula redesign: the app is always dark, so black backgrounds apply whenever enabled
+        if (preferences.getBoolean(CitraSettings.PREF_BLACK_BACKGROUNDS, false)) {
             activity.setTheme(R.style.ThemeOverlay_Citra_Dark)
         }
     }
 
     fun setThemeMode(activity: AppCompatActivity) {
-        val themeMode = PreferenceManager.getDefaultSharedPreferences(activity.applicationContext)
-            .getInt(CitraSettings.PREF_THEME_MODE, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-        activity.delegate.localNightMode = themeMode
+        // Nebula redesign: the app is always dark, so the light/dark setting is not applied
+        activity.delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
         val windowController = WindowCompat.getInsetsController(
             activity.window,
             activity.window.decorView
         )
-        when (themeMode) {
-            AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM -> when (isNightMode(activity)) {
-                false -> setLightModeSystemBars(windowController)
-                true -> setDarkModeSystemBars(windowController)
-            }
-
-            AppCompatDelegate.MODE_NIGHT_NO -> setLightModeSystemBars(windowController)
-
-            AppCompatDelegate.MODE_NIGHT_YES -> setDarkModeSystemBars(windowController)
-        }
-    }
-
-    private fun isNightMode(activity: AppCompatActivity): Boolean =
-        when (activity.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
-            Configuration.UI_MODE_NIGHT_NO -> false
-            Configuration.UI_MODE_NIGHT_YES -> true
-            else -> false
-        }
-
-    private fun setLightModeSystemBars(windowController: WindowInsetsControllerCompat) {
-        windowController.isAppearanceLightStatusBars = true
-        windowController.isAppearanceLightNavigationBars = true
+        setDarkModeSystemBars(windowController)
     }
 
     private fun setDarkModeSystemBars(windowController: WindowInsetsControllerCompat) {

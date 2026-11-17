@@ -1,237 +1,529 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- Nebula game page. Opens full screen from a long-press on a game or the ⋯ button on the home screen. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:background="?attr/colorSurface">
 
-    <com.google.android.material.bottomsheet.BottomSheetDragHandleView
-        android:id="@+id/drag_handle"
+    <!-- Blurred game art behind the header -->
+    <ImageView
+        android:id="@+id/game_page_art"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="@dimen/nebula_page_art_height"
+        android:importantForAccessibility="no"
+        android:scaleType="centerCrop" />
 
-    <androidx.core.widget.NestedScrollView
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/nebula_page_art_height"
+        android:background="@drawable/bg_nebula_hero_scrim" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fadeScrollbars="false"
-        android:fadingEdgeLength="32dp"
-        android:requiresFadingEdge="vertical"
-        android:scrollbarDefaultDelayBeforeFade="0"
-        android:scrollbarFadeDuration="0"
-        android:scrollbarSize="4dp"
-        android:scrollbarStyle="outsideOverlay"
-        android:scrollbarThumbVertical="@drawable/scrollbar_thumb"
-        android:scrollbars="vertical">
+        android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.bottomsheet.BottomSheetDragHandleView
+            android:id="@+id/drag_handle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:nextFocusRight="@id/about_game_play"
-            android:paddingHorizontal="16dp"
-            android:paddingBottom="8dp">
+            android:visibility="gone" />
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/game_icon"
-                android:layout_width="140dp"
-                android:layout_height="140dp"
-                android:focusable="false"
-                app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/constraintLayout"
-                app:shapeAppearance="?attr/shapeAppearanceCornerLarge" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_min="140dp"
-                app:layout_constraintStart_toEndOf="@id/game_icon"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/about_game_title"
-                    style="?attr/textAppearanceTitleMedium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="viewStart"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Application Title" />
-
-                <TextView
-                    android:id="@+id/about_game_company"
-                    style="?attr/textAppearanceBodyMedium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@id/about_game_filename"
-                    app:layout_constraintTop_toBottomOf="@+id/about_game_title"
-                    tools:text="Company" />
-
-                <TextView
-                    android:id="@+id/about_game_region"
-                    style="?attr/textAppearanceBodyMedium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@id/about_game_title"
-                    app:layout_constraintTop_toBottomOf="@+id/about_game_company"
-                    tools:text="Application Region" />
-
-                <TextView
-                    android:id="@+id/about_game_id"
-                    style="?attr/textAppearanceBodyMedium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@id/about_game_filename"
-                    app:layout_constraintTop_toBottomOf="@+id/about_game_region"
-                    tools:text="Game ID" />
-
-                <TextView
-                    android:id="@+id/about_game_filename"
-                    style="?attr/textAppearanceBodyMedium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@id/about_game_title"
-                    app:layout_constraintTop_toBottomOf="@+id/about_game_id"
-                    tools:text="Application Filename" />
-
-                <TextView
-                    android:id="@+id/about_game_filetype"
-                    style="?attr/textAppearanceBodyMedium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@id/about_game_title"
-                    app:layout_constraintTop_toBottomOf="@+id/about_game_filename"
-                    tools:text="Game Filetype" />
-
-                <TextView
-                    android:id="@+id/about_game_playtime"
-                    style="?attr/textAppearanceBodyMedium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@id/about_game_title"
-                    app:layout_constraintTop_toBottomOf="@+id/about_game_filetype"
-                    tools:text="Game Playtime" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fadeScrollbars="true"
+            android:scrollbarSize="3dp"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbarThumbVertical="@drawable/scrollbar_thumb"
+            android:scrollbars="vertical">
 
             <LinearLayout
-                android:id="@+id/horizontal_layout"
-                style="@style/ThemeOverlay.Material3.Button.IconButton.Filled.Tonal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:gravity="start|center"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/game_icon">
+                android:orientation="vertical"
+                android:paddingHorizontal="20dp"
+                android:paddingTop="54dp"
+                android:paddingBottom="32dp">
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/about_game_play"
-                    style="@style/Widget.Material3.Button.Icon"
-                    android:layout_width="142dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:contentDescription="@string/play"
-                    android:focusedByDefault="true"
-                    android:text="@string/play"
-                    android:textAlignment="center"
-                    app:icon="@drawable/ic_play" />
+                    android:id="@+id/game_page_back"
+                    style="@style/Widget.Nebula.IconButton.Glass"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:contentDescription="@string/nebula_back"
+                    app:icon="@drawable/ic_nebula_back"
+                    app:iconGravity="textStart"
+                    app:iconSize="20dp" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/menu_button_open"
-                    style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
-                    android:layout_width="48dp"
+                <!-- ============ Header ============ -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    app:icon="@drawable/ic_open"
-                    app:iconGravity="textStart" />
+                    android:layout_marginTop="40dp"
+                    android:gravity="bottom"
+                    android:orientation="horizontal">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/menu_button_uninstall"
-                    style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
-                    android:layout_width="48dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    app:icon="@drawable/ic_uninstall"
-                    app:iconGravity="textStart" />
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/game_icon"
+                        android:layout_width="116dp"
+                        android:layout_height="116dp"
+                        android:elevation="14dp"
+                        android:focusable="false"
+                        android:importantForAccessibility="no"
+                        android:scaleType="centerCrop"
+                        app:shapeAppearance="@style/ShapeAppearance.Nebula.Corner.Large" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/game_shortcut"
-                    style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
-                    android:layout_width="48dp"
+                    <LinearLayout
+                        android:id="@+id/constraintLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:paddingBottom="4dp">
+
+                        <TextView
+                            android:id="@+id/about_game_company"
+                            style="@style/TextAppearance.Nebula.Overline"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:ellipsize="end"
+                            tools:text="Northwind Games" />
+
+                        <TextView
+                            android:id="@+id/about_game_title"
+                            style="@style/TextAppearance.Nebula.HeadlineMedium"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:ellipsize="end"
+                            android:lineSpacingMultiplier="1.05"
+                            android:maxLines="3"
+                            android:textColor="?attr/colorOnSurface"
+                            tools:text="Sky Harbor" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/about_game_region"
+                                style="@style/TextAppearance.Nebula.LabelSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="6dp"
+                                android:background="@drawable/bg_nebula_tag"
+                                android:ellipsize="end"
+                                android:maxWidth="150dp"
+                                android:paddingHorizontal="8dp"
+                                android:paddingVertical="3dp"
+                                android:singleLine="true"
+                                android:textColor="?attr/colorOnSurface"
+                                tools:text="North America" />
+
+                            <TextView
+                                android:id="@+id/about_game_filetype"
+                                style="@style/TextAppearance.Nebula.LabelSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_nebula_tag"
+                                android:paddingHorizontal="8dp"
+                                android:paddingVertical="3dp"
+                                android:singleLine="true"
+                                android:textColor="?attr/colorOnSurface"
+                                tools:text="CCI" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- ============ Actions ============ -->
+                <LinearLayout
+                    android:id="@+id/horizontal_layout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:contentDescription="@string/shortcut"
-                    app:icon="@drawable/ic_shortcut"
-                    app:iconGravity="textStart" />
+                    android:layout_marginTop="24dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/about_game_play"
+                        style="@style/Widget.Nebula.Button.Icon"
+                        android:layout_width="0dp"
+                        android:layout_height="52dp"
+                        android:layout_weight="1"
+                        android:contentDescription="@string/play"
+                        android:focusedByDefault="true"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:text="@string/play"
+                        app:icon="@drawable/ic_nebula_play"
+                        app:iconGravity="textStart"
+                        app:iconSize="18dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/menu_button_open"
+                        style="@style/Widget.Nebula.IconButton.Glass"
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        android:layout_marginStart="10dp"
+                        android:contentDescription="@string/game_context_open_app"
+                        app:icon="@drawable/ic_open"
+                        app:iconGravity="textStart"
+                        app:iconSize="20dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/menu_button_uninstall"
+                        style="@style/Widget.Nebula.IconButton.Glass"
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        android:layout_marginStart="10dp"
+                        android:contentDescription="@string/uninstall_cia"
+                        app:icon="@drawable/ic_uninstall"
+                        app:iconGravity="textStart"
+                        app:iconSize="20dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/game_shortcut"
+                        style="@style/Widget.Nebula.IconButton.Glass"
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        android:layout_marginStart="10dp"
+                        android:contentDescription="@string/shortcut"
+                        app:icon="@drawable/ic_shortcut"
+                        app:iconGravity="textStart"
+                        app:iconSize="20dp" />
+
+                </LinearLayout>
+
+                <!-- ============ Stats ============ -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="26dp"
+                    android:background="@drawable/bg_nebula_glass"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="14dp">
+
+                    <TextView
+                        android:id="@+id/about_game_playtime_label"
+                        style="@style/TextAppearance.Nebula.Body"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textSize="12sp"
+                        tools:text="Playtime" />
+
+                    <TextView
+                        android:id="@+id/about_game_playtime"
+                        style="@style/TextAppearance.Nebula.HeadlineSmall"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="26sp"
+                        tools:text="12h 34m 56s" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_nebula_glass"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="14dp">
+
+                        <TextView
+                            style="@style/TextAppearance.Nebula.Body"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/game_page_last_played"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/about_game_last_played"
+                            style="@style/TextAppearance.Nebula.TitleSmall"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textSize="15sp"
+                            tools:text="3 days ago" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_nebula_glass"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="14dp">
+
+                        <TextView
+                            style="@style/TextAppearance.Nebula.Body"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/game_page_added"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/about_game_added"
+                            style="@style/TextAppearance.Nebula.TitleSmall"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textSize="15sp"
+                            tools:text="Nov 2, 2026" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- ============ Details ============ -->
+                <TextView
+                    style="@style/TextAppearance.Nebula.Section"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="26dp"
+                    android:text="@string/game_page_details" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_nebula_glass"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_nebula_divider_bottom"
+                        android:orientation="horizontal"
+                        android:padding="14dp">
+
+                        <TextView
+                            android:id="@+id/about_game_id_label"
+                            style="@style/TextAppearance.Nebula.Body"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="12dp"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            tools:text="ID" />
+
+                        <TextView
+                            android:id="@+id/about_game_id"
+                            style="@style/TextAppearance.Nebula.Body"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textIsSelectable="true"
+                            tools:text="0004000000123400" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_nebula_divider_bottom"
+                        android:orientation="horizontal"
+                        android:padding="14dp">
+
+                        <TextView
+                            android:id="@+id/about_game_filename_label"
+                            style="@style/TextAppearance.Nebula.Body"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="12dp"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            tools:text="File" />
+
+                        <TextView
+                            android:id="@+id/about_game_filename"
+                            style="@style/TextAppearance.Nebula.Body"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textIsSelectable="true"
+                            tools:text="sky_harbor.cci" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_nebula_divider_bottom"
+                        android:orientation="horizontal"
+                        android:padding="14dp">
+
+                        <TextView
+                            style="@style/TextAppearance.Nebula.Body"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="12dp"
+                            android:text="@string/game_page_storage"
+                            android:textColor="?attr/colorOnSurfaceVariant" />
+
+                        <TextView
+                            android:id="@+id/about_game_storage"
+                            style="@style/TextAppearance.Nebula.Body"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:textColor="?attr/colorOnSurface"
+                            tools:text="Game file" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="14dp">
+
+                        <TextView
+                            style="@style/TextAppearance.Nebula.Body"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="12dp"
+                            android:text="@string/game_page_compressed"
+                            android:textColor="?attr/colorOnSurfaceVariant" />
+
+                        <TextView
+                            android:id="@+id/about_game_compressed"
+                            style="@style/TextAppearance.Nebula.Body"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:textColor="?attr/colorOnSurface"
+                            tools:text="No" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- ============ Manage ============ -->
+                <TextView
+                    style="@style/TextAppearance.Nebula.Section"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="26dp"
+                    android:text="@string/game_page_manage" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:nextFocusRight="@id/about_game_play">
+
+                    <androidx.constraintlayout.helper.widget.Flow
+                        android:id="@+id/horizontal_flow_2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:constraint_referenced_ids="application_settings,cheats,insert_cartridge_button,compress_decompress,delete_cache"
+                        app:flow_horizontalAlign="start"
+                        app:flow_horizontalBias="0"
+                        app:flow_horizontalGap="8dp"
+                        app:flow_horizontalStyle="packed"
+                        app:flow_verticalGap="8dp"
+                        app:flow_wrapMode="chain"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/application_settings"
+                        style="@style/Widget.Nebula.Button.Tonal.Icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="44dp"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:contentDescription="@string/application_settings"
+                        android:text="@string/application_settings"
+                        android:textSize="13.5sp"
+                        app:icon="@drawable/ic_settings"
+                        app:iconSize="16dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/cheats"
+                        style="@style/Widget.Nebula.Button.Tonal.Icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="44dp"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:contentDescription="@string/cheats"
+                        android:text="@string/cheats"
+                        android:textSize="13.5sp"
+                        app:icon="@drawable/ic_code"
+                        app:iconSize="16dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/insert_cartridge_button"
+                        style="@style/Widget.Nebula.Button.Tonal.Icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="44dp"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:textSize="13.5sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/compress_decompress"
+                        style="@style/Widget.Nebula.Button.Tonal.Icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="44dp"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:contentDescription="@string/compress"
+                        android:text="@string/compress"
+                        android:textSize="13.5sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/delete_cache"
+                        style="@style/Widget.Nebula.Button.Tonal.Icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="44dp"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:contentDescription="@string/delete_shader_cache"
+                        android:text="@string/delete_shader_cache"
+                        android:textSize="13.5sp" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>
 
-            <androidx.constraintlayout.helper.widget.Flow
-                android:id="@+id/horizontal_flow_2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:constraint_referenced_ids="application_settings,cheats,insert_cartridge_button,compress_decompress,delete_cache"
-                app:flow_horizontalAlign="start"
-                app:flow_horizontalBias="0"
-                app:flow_horizontalGap="8dp"
-                app:flow_horizontalStyle="packed"
-                app:flow_verticalGap="8dp"
-                app:flow_wrapMode="chain"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/horizontal_layout" />
+        </androidx.core.widget.NestedScrollView>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/application_settings"
-                style="@style/Widget.Material3.Button.TonalButton.Icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:contentDescription="@string/application_settings"
-                android:text="@string/application_settings" />
+    </LinearLayout>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/cheats"
-                style="@style/Widget.Material3.Button.TonalButton.Icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/cheats"
-                android:text="@string/cheats" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/insert_cartridge_button"
-                style="@style/Widget.Material3.Button.TonalButton.Icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/compress_decompress"
-                style="@style/Widget.Material3.Button.TonalButton.Icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:contentDescription="@string/compress"
-                android:text="@string/compress" />
-
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/delete_cache"
-                style="@style/Widget.Material3.Button.TonalButton.Icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/delete_shader_cache"
-                android:text="@string/delete_shader_cache" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
-</LinearLayout>
+</FrameLayout>

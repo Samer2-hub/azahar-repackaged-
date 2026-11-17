@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
-        android:background="?colorSurface">
+        android:background="?attr/nebulaSheetColor">
 
         <View
             android:layout_width="128dp"

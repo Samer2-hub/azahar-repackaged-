@@ -83,7 +83,7 @@ class DriverManagerFragment : Fragment() {
         binding.listDrivers.apply {
             layoutManager = GridLayoutManager(
                 requireContext(),
-                resources.getInteger(R.integer.game_grid_columns)
+                resources.getInteger(R.integer.list_grid_columns)
             )
             adapter = DriverAdapter(driverViewModel)
         }

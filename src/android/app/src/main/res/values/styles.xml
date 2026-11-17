@@ -1,9 +1,441 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- ============ Type ============ -->
+    <style name="TextAppearance.Nebula.DisplayLarge" parent="TextAppearance.Material3.DisplayLarge">
+        <item name="fontFamily">sans-serif-light</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+    <style name="TextAppearance.Nebula.DisplayMedium" parent="TextAppearance.Material3.DisplayMedium">
+        <item name="fontFamily">sans-serif-light</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+    <style name="TextAppearance.Nebula.DisplaySmall" parent="TextAppearance.Material3.DisplaySmall">
+        <item name="fontFamily">sans-serif-light</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+    <style name="TextAppearance.Nebula.HeadlineLarge" parent="TextAppearance.Material3.HeadlineLarge">
+        <item name="fontFamily">sans-serif-light</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">34sp</item>
+    </style>
+    <style name="TextAppearance.Nebula.HeadlineMedium" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="fontFamily">sans-serif-light</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">28sp</item>
+    </style>
+    <style name="TextAppearance.Nebula.HeadlineSmall" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="fontFamily">sans-serif-light</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+    <style name="TextAppearance.Nebula.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
+        <item name="fontFamily">sans-serif-light</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+    <style name="TextAppearance.Nebula.TitleMedium" parent="TextAppearance.Material3.TitleMedium">
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="TextAppearance.Nebula.TitleSmall" parent="TextAppearance.Material3.TitleSmall">
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="TextAppearance.Nebula.LabelLarge" parent="TextAppearance.Material3.LabelLarge">
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:letterSpacing">0.01</item>
+    </style>
+    <style name="TextAppearance.Nebula.LabelMedium" parent="TextAppearance.Material3.LabelMedium">
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="TextAppearance.Nebula.LabelSmall" parent="TextAppearance.Material3.LabelSmall">
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+    <style name="TextAppearance.Nebula.Overline" parent="TextAppearance.Material3.LabelMedium">
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:letterSpacing">0.12</item>
+        <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
+    </style>
+    <style name="TextAppearance.Nebula.Section" parent="TextAppearance.Material3.TitleSmall">
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+    <style name="TextAppearance.Nebula.Hero" parent="TextAppearance.Material3.DisplaySmall">
+        <item name="fontFamily">sans-serif-light</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">38sp</item>
+        <item name="android:letterSpacing">-0.01</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+    <style name="TextAppearance.Nebula.Body" parent="TextAppearance.Material3.BodyMedium">
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="TextAppearance.Nebula.Chip" parent="TextAppearance.Material3.LabelMedium">
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">12.5sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+    <style name="TextAppearance.Nebula.NavLabel" parent="TextAppearance.Material3.LabelMedium">
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <!-- ============ Shapes ============ -->
+    <style name="ShapeAppearance.Nebula.Corner.ExtraSmall" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+    <style name="ShapeAppearance.Nebula.Corner.Small" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+    <style name="ShapeAppearance.Nebula.Corner.Medium" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+    <style name="ShapeAppearance.Nebula.Corner.Large" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">22dp</item>
+    </style>
+    <style name="ShapeAppearance.Nebula.Corner.ExtraLarge" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">28dp</item>
+    </style>
+    <style name="ShapeAppearance.Nebula.Corner.Full" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+    <style name="ShapeAppearance.Nebula.Sheet" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">28dp</item>
+        <item name="cornerSizeTopRight">28dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+
+    <!-- ============ Buttons ============ -->
+    <style name="Widget.Nebula.Button" parent="Widget.Material3.Button">
+        <item name="backgroundTint">?attr/colorOnSurface</item>
+        <item name="android:textColor">?attr/colorSurface</item>
+        <item name="iconTint">?attr/colorSurface</item>
+        <item name="cornerRadius">26dp</item>
+        <item name="strokeWidth">0dp</item>
+        <item name="android:textAppearance">?attr/textAppearanceLabelLarge</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="rippleColor">#33000000</item>
+    </style>
+    <style name="Widget.Nebula.Button.Icon" parent="Widget.Material3.Button.Icon">
+        <item name="backgroundTint">?attr/colorOnSurface</item>
+        <item name="android:textColor">?attr/colorSurface</item>
+        <item name="iconTint">?attr/colorSurface</item>
+        <item name="cornerRadius">26dp</item>
+        <item name="strokeWidth">0dp</item>
+        <item name="android:textAppearance">?attr/textAppearanceLabelLarge</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="rippleColor">#33000000</item>
+    </style>
+    <style name="Widget.Nebula.Button.Unelevated" parent="Widget.Material3.Button.UnelevatedButton">
+        <item name="backgroundTint">?attr/colorOnSurface</item>
+        <item name="android:textColor">?attr/colorSurface</item>
+        <item name="iconTint">?attr/colorSurface</item>
+        <item name="cornerRadius">26dp</item>
+        <item name="strokeWidth">0dp</item>
+        <item name="android:textAppearance">?attr/textAppearanceLabelLarge</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="rippleColor">#33000000</item>
+    </style>
+    <style name="Widget.Nebula.Button.Glass" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="backgroundTint">?attr/nebulaGlassColor</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="iconTint">?attr/colorOnSurface</item>
+        <item name="strokeColor">?attr/nebulaGlassStrokeColor</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="cornerRadius">26dp</item>
+        <item name="android:textAppearance">?attr/textAppearanceLabelLarge</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="elevation">0dp</item>
+    </style>
+    <style name="Widget.Nebula.Button.Tonal" parent="Widget.Material3.Button.TonalButton">
+        <item name="backgroundTint">?attr/nebulaGlassColor</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="iconTint">?attr/colorOnSurface</item>
+        <item name="strokeColor">?attr/nebulaGlassStrokeColor</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="cornerRadius">26dp</item>
+        <item name="android:textAppearance">?attr/textAppearanceLabelLarge</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="elevation">0dp</item>
+    </style>
+    <style name="Widget.Nebula.Button.Tonal.Icon" parent="Widget.Material3.Button.TonalButton.Icon">
+        <item name="backgroundTint">?attr/nebulaGlassColor</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="iconTint">?attr/colorOnSurface</item>
+        <item name="strokeColor">?attr/nebulaGlassStrokeColor</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="cornerRadius">26dp</item>
+        <item name="android:textAppearance">?attr/textAppearanceLabelLarge</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="elevation">0dp</item>
+    </style>
+    <style name="Widget.Nebula.Button.Elevated" parent="Widget.Material3.Button.ElevatedButton">
+        <item name="backgroundTint">?attr/nebulaGlassColor</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="iconTint">?attr/colorOnSurface</item>
+        <item name="strokeColor">?attr/nebulaGlassStrokeColor</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="cornerRadius">26dp</item>
+        <item name="android:textAppearance">?attr/textAppearanceLabelLarge</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="elevation">0dp</item>
+    </style>
+    <style name="Widget.Nebula.Button.Text" parent="Widget.Material3.Button.TextButton">
+        <item name="android:textAppearance">?attr/textAppearanceLabelLarge</item>
+        <item name="cornerRadius">26dp</item>
+    </style>
+    <style name="Widget.Nebula.Button.Text.Dialog" parent="Widget.Material3.Button.TextButton.Dialog">
+        <item name="android:textAppearance">?attr/textAppearanceLabelLarge</item>
+        <item name="cornerRadius">26dp</item>
+    </style>
+    <style name="Widget.Nebula.IconButton" parent="Widget.Material3.Button.IconButton">
+        <item name="iconTint">?attr/colorOnSurface</item>
+    </style>
+    <style name="Widget.Nebula.IconButton.Glass" parent="Widget.Material3.Button.IconButton.Filled.Tonal">
+        <item name="backgroundTint">?attr/nebulaGlassColor</item>
+        <item name="iconTint">?attr/colorOnSurface</item>
+        <item name="strokeColor">?attr/nebulaGlassStrokeColor</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="cornerRadius">26dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="iconPadding">0dp</item>
+    </style>
+
+    <!-- ============ Cards ============ -->
+    <style name="Widget.Nebula.Card" parent="Widget.Material3.CardView.Outlined">
+        <item name="cardBackgroundColor">?attr/nebulaGlassColor</item>
+        <item name="strokeColor">?attr/nebulaGlassStrokeColor</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="cardCornerRadius">18dp</item>
+        <item name="cardElevation">0dp</item>
+    </style>
+    <style name="Widget.Nebula.Card.Filled" parent="Widget.Material3.CardView.Filled">
+        <item name="cardBackgroundColor">?attr/nebulaGlassColor</item>
+        <item name="strokeColor">?attr/nebulaGlassStrokeColor</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="cardCornerRadius">18dp</item>
+        <item name="cardElevation">0dp</item>
+    </style>
+    <style name="Widget.Nebula.Card.Elevated" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardBackgroundColor">?attr/nebulaGlassColor</item>
+        <item name="strokeColor">?attr/nebulaGlassStrokeColor</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="cardCornerRadius">18dp</item>
+        <item name="cardElevation">0dp</item>
+    </style>
+    <style name="Widget.Nebula.Card.Plain" parent="Widget.Material3.CardView.Outlined">
+        <item name="cardBackgroundColor">@android:color/transparent</item>
+        <item name="strokeWidth">0dp</item>
+        <item name="cardCornerRadius">18dp</item>
+        <item name="cardElevation">0dp</item>
+    </style>
+
+    <!-- ============ Navigation ============ -->
+    <!-- Floating glass pill at the bottom of the screen -->
+    <style name="Widget.Nebula.BottomNavigation" parent="Widget.Material3.BottomNavigationView">
+        <item name="android:background">@drawable/bg_nebula_nav</item>
+        <item name="backgroundTint">@null</item>
+        <item name="itemIconTint">@color/nebula_nav_item</item>
+        <item name="itemTextColor">@color/nebula_nav_item</item>
+        <item name="itemTextAppearanceActive">@style/TextAppearance.Nebula.NavLabel</item>
+        <item name="itemTextAppearanceInactive">@style/TextAppearance.Nebula.NavLabel</item>
+        <item name="itemActiveIndicatorStyle">@style/Widget.Nebula.NavIndicator</item>
+        <item name="itemRippleColor">@android:color/transparent</item>
+        <item name="labelVisibilityMode">labeled</item>
+        <item name="paddingBottomSystemWindowInsets">false</item>
+        <item name="elevation">10dp</item>
+    </style>
+    <style name="Widget.Nebula.NavIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">?attr/nebulaGlassStrongColor</item>
+        <item name="android:width">72dp</item>
+        <item name="android:height">34dp</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.Nebula.Corner.Full</item>
+    </style>
+    <style name="Widget.Nebula.NavigationRail" parent="Widget.Material3.NavigationRailView">
+        <item name="android:background">@drawable/bg_nebula_nav_rail</item>
+        <item name="backgroundTint">@null</item>
+        <item name="itemIconTint">@color/nebula_nav_item</item>
+        <item name="itemTextColor">@color/nebula_nav_item</item>
+        <item name="itemTextAppearanceActive">@style/TextAppearance.Nebula.NavLabel</item>
+        <item name="itemTextAppearanceInactive">@style/TextAppearance.Nebula.NavLabel</item>
+        <item name="itemActiveIndicatorStyle">@style/Widget.Nebula.NavRailIndicator</item>
+        <item name="labelVisibilityMode">labeled</item>
+        <item name="paddingTopSystemWindowInsets">false</item>
+        <item name="paddingBottomSystemWindowInsets">false</item>
+        <item name="elevation">10dp</item>
+    </style>
+    <style name="Widget.Nebula.NavRailIndicator" parent="Widget.Material3.NavigationRailView.ActiveIndicator">
+        <item name="android:color">?attr/nebulaGlassStrongColor</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.Nebula.Corner.Medium</item>
+    </style>
+    <style name="Widget.Nebula.NavigationView" parent="Widget.Material3.NavigationView">
+        <item name="backgroundTint">?attr/nebulaSheetColor</item>
+        <item name="drawerLayoutCornerSize">28dp</item>
+        <item name="itemShapeAppearance">@style/ShapeAppearance.Nebula.Corner.Full</item>
+        <item name="itemShapeFillColor">@color/nebula_drawer_item_fill</item>
+        <item name="itemIconTint">?attr/colorOnSurface</item>
+        <item name="itemTextColor">?attr/colorOnSurface</item>
+        <item name="itemTextAppearance">@style/TextAppearance.Nebula.TitleMedium</item>
+    </style>
+    <style name="Widget.Nebula.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="titleTextAppearance">@style/TextAppearance.Nebula.TitleLarge</item>
+    </style>
+    <style name="Widget.Nebula.CollapsingToolbar.Medium" parent="Widget.Material3.CollapsingToolbar.Medium">
+        <item name="expandedTitleTextAppearance">@style/TextAppearance.Nebula.HeadlineMedium</item>
+        <item name="collapsedTitleTextAppearance">@style/TextAppearance.Nebula.TitleLarge</item>
+    </style>
+
+    <!-- ============ Controls ============ -->
+    <style name="Widget.Nebula.Switch" parent="Widget.Material3.CompoundButton.MaterialSwitch">
+        <item name="trackTint">@color/nebula_switch_track</item>
+        <item name="thumbTint">@color/nebula_switch_thumb</item>
+        <item name="trackDecorationTint">@color/nebula_switch_track_decoration</item>
+    </style>
     <style name="CitraSlider" parent="Widget.Material3.Slider">
         <item name="tickVisible">false</item>
         <item name="labelBehavior">gone</item>
+        <item name="thumbColor">?attr/colorOnSurface</item>
+        <item name="trackColorActive">?attr/colorPrimary</item>
+        <item name="trackColorInactive">?attr/nebulaTrackColor</item>
+        <item name="trackHeight">6dp</item>
+    </style>
+    <style name="Widget.Nebula.CheckBox" parent="Widget.Material3.CompoundButton.CheckBox">
+        <item name="buttonTint">@color/nebula_check_tint</item>
+    </style>
+    <style name="Widget.Nebula.RadioButton" parent="Widget.Material3.CompoundButton.RadioButton">
+        <item name="buttonTint">@color/nebula_check_tint</item>
+    </style>
+    <style name="Widget.Nebula.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/nebula_input_stroke</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeWidthFocused">2dp</item>
+        <item name="boxCornerRadiusTopStart">14dp</item>
+        <item name="boxCornerRadiusTopEnd">14dp</item>
+        <item name="boxCornerRadiusBottomStart">14dp</item>
+        <item name="boxCornerRadiusBottomEnd">14dp</item>
+    </style>
+    <style name="Widget.Nebula.TextInputLayout.Dropdown" parent="Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxStrokeColor">@color/nebula_input_stroke</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeWidthFocused">2dp</item>
+        <item name="boxCornerRadiusTopStart">14dp</item>
+        <item name="boxCornerRadiusTopEnd">14dp</item>
+        <item name="boxCornerRadiusBottomStart">14dp</item>
+        <item name="boxCornerRadiusBottomEnd">14dp</item>
+    </style>
+    <!-- Glass pill chip; selected chips turn solid white -->
+    <style name="Widget.Nebula.Chip" parent="Widget.Material3.Chip.Suggestion">
+        <item name="chipBackgroundColor">@color/nebula_chip_bg</item>
+        <item name="chipStrokeColor">?attr/nebulaGlassStrokeColor</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipCornerRadius">18dp</item>
+        <item name="chipMinHeight">36dp</item>
+        <item name="android:textColor">@color/nebula_chip_text</item>
+        <item name="android:textAppearance">@style/TextAppearance.Nebula.Chip</item>
+        <item name="checkedIconTint">?attr/colorSurface</item>
+        <item name="chipIconTint">@color/nebula_chip_text</item>
+        <item name="elevation">0dp</item>
+    </style>
+    <style name="Widget.Nebula.LinearProgress" parent="Widget.Material3.LinearProgressIndicator">
+        <item name="trackThickness">6dp</item>
+        <item name="trackCornerRadius">3dp</item>
+        <item name="indicatorColor">?attr/colorPrimary</item>
+        <item name="trackColor">?attr/nebulaTrackColor</item>
+    </style>
+    <style name="Widget.Nebula.CircularProgress" parent="Widget.Material3.CircularProgressIndicator">
+        <item name="trackThickness">4dp</item>
+        <item name="indicatorColor">?attr/colorPrimary</item>
+    </style>
+    <style name="Widget.Nebula.FloatingActionButton" parent="Widget.Material3.FloatingActionButton.Primary">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.Nebula.Corner.Large</item>
+        <item name="backgroundTint">?attr/colorOnSurface</item>
+        <item name="tint">?attr/colorSurface</item>
+    </style>
+    <style name="Widget.Nebula.ExtendedFloatingActionButton" parent="Widget.Material3.ExtendedFloatingActionButton.Icon.Primary">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.Nebula.Corner.Full</item>
+        <item name="backgroundTint">?attr/colorOnSurface</item>
+        <item name="android:textColor">?attr/colorSurface</item>
+        <item name="iconTint">?attr/colorSurface</item>
+        <item name="android:textAppearance">?attr/textAppearanceLabelLarge</item>
+    </style>
+    <style name="Widget.Nebula.Divider" parent="Widget.Material3.MaterialDivider">
+        <item name="dividerColor">@color/nebula_glass_line</item>
+        <item name="dividerThickness">1dp</item>
+    </style>
+    <style name="Widget.Nebula.PopupMenu" parent="Widget.Material3.PopupMenu">
+        <item name="android:popupBackground">@drawable/bg_nebula_popup</item>
+    </style>
+
+    <!-- ============ Dialogs and sheets ============ -->
+    <style name="ThemeOverlay.Nebula.MaterialAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="alertDialogStyle">@style/MaterialAlertDialog.Nebula</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.Nebula.Button.Text.Dialog</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Widget.Nebula.Button.Text.Dialog</item>
+        <item name="buttonBarNeutralButtonStyle">@style/Widget.Nebula.Button.Text.Dialog</item>
+    </style>
+    <style name="MaterialAlertDialog.Nebula" parent="MaterialAlertDialog.Material3">
+        <item name="shapeAppearance">@style/ShapeAppearance.Nebula.Corner.ExtraLarge</item>
+        <item name="backgroundTint">?attr/nebulaSheetColor</item>
+    </style>
+    <style name="ThemeOverlay.Nebula.BottomSheetDialog" parent="ThemeOverlay.Material3.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.Nebula.BottomSheet</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+    <style name="Widget.Nebula.BottomSheet" parent="Widget.Material3.BottomSheet.Modal">
+        <item name="backgroundTint">?attr/nebulaSheetColor</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.Nebula.Sheet</item>
+    </style>
+    <style name="Widget.Nebula.BottomSheet.DragHandle" parent="Widget.Material3.BottomSheet.DragHandle">
+        <item name="tint">?attr/colorOnSurfaceVariant</item>
     </style>
 
 </resources>

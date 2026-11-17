@@ -26,6 +26,7 @@ import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.transition.MaterialSharedAxis
+import org.citra.citra_emu.BuildConfig
 import org.citra.citra_emu.CitraApplication
 import org.citra.citra_emu.HomeNavigationDirections
 import org.citra.citra_emu.R
@@ -200,11 +201,11 @@ class HomeSettingsFragment : Fragment() {
             )
         )
 
+        // Nebula: Options is a single glass list
+        binding.optionsVersion.text =
+            "${getString(R.string.app_name)} · ${BuildConfig.VERSION_NAME}"
         binding.homeSettingsList.apply {
-            layoutManager = GridLayoutManager(
-                requireContext(),
-                resources.getInteger(R.integer.game_grid_columns)
-            )
+            layoutManager = GridLayoutManager(requireContext(), 1)
             adapter = HomeSettingAdapter(
                 requireActivity() as AppCompatActivity,
                 viewLifecycleOwner,

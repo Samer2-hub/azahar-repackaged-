@@ -7,6 +7,7 @@ package org.citra.citra_emu.fragments
 import android.annotation.SuppressLint
 import android.net.Uri
 import android.os.Bundle
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,8 +24,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.transition.MaterialFadeThrough
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
@@ -34,6 +37,7 @@ import org.citra.citra_emu.CitraApplication
 import org.citra.citra_emu.NativeLibrary
 import org.citra.citra_emu.R
 import org.citra.citra_emu.adapters.GameAdapter
+import org.citra.citra_emu.adapters.GameTileAdapter
 import org.citra.citra_emu.databinding.FragmentGamesBinding
 import org.citra.citra_emu.features.settings.model.BooleanSetting
 import org.citra.citra_emu.features.settings.model.CitraSettings
@@ -41,6 +45,7 @@ import org.citra.citra_emu.features.settings.model.IntSetting
 import org.citra.citra_emu.features.updatechecker.UpdateChecker
 import org.citra.citra_emu.model.Game
 import org.citra.citra_emu.utils.BuildUtil
+import org.citra.citra_emu.utils.GameIconUtils
 import org.citra.citra_emu.viewmodel.CompressProgressDialogViewModel
 import org.citra.citra_emu.viewmodel.GamesViewModel
 import org.citra.citra_emu.viewmodel.HomeViewModel
@@ -52,6 +57,8 @@ class GamesFragment : Fragment() {
     private val gamesViewModel: GamesViewModel by activityViewModels()
     private val homeViewModel: HomeViewModel by activityViewModels()
     private lateinit var gameAdapter: GameAdapter
+    private lateinit var tileAdapter: GameTileAdapter
+    private var selectedGame: Game? = null
 
     private val openImageLauncher = registerForActivityResult(
         ActivityResultContracts.GetContent()
@@ -63,6 +70,8 @@ class GamesFragment : Fragment() {
     private var pendingCompressInvocation: String? = null
 
     companion object {
+        private const val CAROUSEL_SIZE = 10
+
         fun doCompression(
             fragment: Fragment,
             gamesViewModel: GamesViewModel,
@@ -165,6 +174,30 @@ class GamesFragment : Fragment() {
             adapter = this@GamesFragment.gameAdapter
         }
 
+        // Nebula home screen: recently played tiles and the selected game
+        tileAdapter = GameTileAdapter(
+            requireActivity(),
+            onSelect = { selectGame(it) },
+            onLaunch = { gameAdapter.launchGame(binding.root, it) }
+        )
+        binding.carouselGames.apply {
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            adapter = tileAdapter
+            itemAnimator = null
+        }
+        gameAdapter.applyArtBlur(binding.heroArt)
+        binding.heroPlay.setOnClickListener {
+            selectedGame?.let { gameAdapter.launchGame(binding.root, it) }
+        }
+        binding.heroMore.setOnClickListener { view ->
+            selectedGame?.let { gameAdapter.showGamePage(view, it) }
+        }
+        binding.homeSearchButton.setOnClickListener {
+            requireActivity().findViewById<NavigationBarView>(R.id.navigation_view)
+                ?.selectedItemId = R.id.searchFragment
+        }
+
         binding.swipeRefresh.apply {
             // Add swipe down to refresh gesture
             setOnRefreshListener {
@@ -202,7 +235,8 @@ class GamesFragment : Fragment() {
                         if (gamesViewModel.games.value.isEmpty() && !isReloading) {
                             binding.noticeText.visibility = View.VISIBLE
                         } else {
-                            binding.noticeText.visibility = View.INVISIBLE
+                            // Nebula: GONE so the empty-library message takes no space
+                            binding.noticeText.visibility = View.GONE
                         }
                     }
                 }
@@ -296,17 +330,77 @@ class GamesFragment : Fragment() {
 
     private fun setAdapter(games: List<Game>) {
         val preferences = PreferenceManager.getDefaultSharedPreferences(CitraApplication.appContext)
-        if (preferences.getBoolean(CitraSettings.PREF_SHOW_HOME_APPS, false)) {
-            (binding.gridGames.adapter as GameAdapter).submitList(games)
+        val visibleGames = if (preferences.getBoolean(CitraSettings.PREF_SHOW_HOME_APPS, false)) {
+            games
         } else {
-            val filteredList = games.filter { !it.isSystemTitle }
-            (binding.gridGames.adapter as GameAdapter).submitList(filteredList)
+            games.filter { !it.isSystemTitle }
         }
+        // Nebula: most recently played first
+        val sortedGames = visibleGames.sortedByDescending {
+            preferences.getLong(it.keyLastPlayedTime, 0L)
+        }
+        (binding.gridGames.adapter as GameAdapter).submitList(sortedGames)
+
+        binding.gamesCount.text = resources.getQuantityString(
+            R.plurals.nebula_titles_count,
+            sortedGames.size,
+            sortedGames.size
+        )
+        tileAdapter.submit(sortedGames.take(CAROUSEL_SIZE))
+        val hasGames = sortedGames.isNotEmpty()
+        binding.carouselGames.visibility = if (hasGames) View.VISIBLE else View.GONE
+        binding.heroGroup.visibility = if (hasGames) View.VISIBLE else View.GONE
+        binding.allGamesHeader.visibility = if (hasGames) View.VISIBLE else View.GONE
+        binding.heroArt.visibility = if (hasGames) View.VISIBLE else View.INVISIBLE
+
+        val stillThere = sortedGames.firstOrNull { it.path == selectedGame?.path }
+        val toSelect = stillThere ?: sortedGames.firstOrNull()
+        if (toSelect != null) {
+            selectGame(toSelect)
+        } else {
+            selectedGame = null
+        }
+    }
+
+    private fun selectGame(game: Game) {
+        if (_binding == null) {
+            return
+        }
+        selectedGame = game
+        tileAdapter.setSelected(game.path)
+
+        val metaParts = listOf(game.company, gameAdapter.translateRegions(game.regions))
+            .filter { it.isNotEmpty() }
+        binding.heroMeta.text = metaParts.joinToString(" · ")
+        binding.heroTitle.text = game.title
+
+        val playTimeSeconds = NativeLibrary.playTimeManagerGetPlayTime(game.titleId)
+        val hours = playTimeSeconds / 3600
+        val minutes = (playTimeSeconds % 3600) / 60
+        val playTime = if (hours > 0) "${hours}h ${minutes}m" else "${minutes}m"
+        binding.heroPlaytime.text = getString(R.string.nebula_played, playTime)
+
+        val preferences = PreferenceManager.getDefaultSharedPreferences(CitraApplication.appContext)
+        val lastPlayed = preferences.getLong(game.keyLastPlayedTime, 0L)
+        binding.heroLastPlayed.text = if (lastPlayed == 0L) {
+            getString(R.string.nebula_not_played)
+        } else {
+            getString(
+                R.string.nebula_last_played,
+                DateUtils.getRelativeTimeSpanString(
+                    lastPlayed,
+                    System.currentTimeMillis(),
+                    DateUtils.MINUTE_IN_MILLIS
+                )
+            )
+        }
+
+        GameIconUtils.loadGameIcon(requireActivity(), game, binding.heroArt)
     }
 
     private fun scrollToTop() {
         if (_binding != null) {
-            binding.gridGames.smoothScrollToPosition(0)
+            binding.homeScroll.smoothScrollTo(0, 0)
         }
     }
 
@@ -320,8 +414,11 @@ class GamesFragment : Fragment() {
         val spacingNavigationRail =
             resources.getDimensionPixelSize(R.dimen.spacing_navigation_rail)
 
+        // Nebula: the page content starts under the status bar; the hero art goes behind it
+        binding.homeContent.updatePadding(
+            top = barInsets.top + resources.getDimensionPixelSize(R.dimen.spacing_medlarge)
+        )
         binding.gridGames.updatePadding(
-            top = barInsets.top + extraListSpacing,
             bottom = barInsets.bottom + spacingNavigation + extraListSpacing
         )
 

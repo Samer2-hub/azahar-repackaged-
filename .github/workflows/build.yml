@@ -1,11 +1,8 @@
 name: citra-build
 
+# Full multi-platform build: manual only in this fork (android-apk.yml builds the APK on push)
 on:
-  push:
-    branches: [ "*" ]
-    tags: [ "*" ]
-  pull_request:
-    branches: [ master ]
+  workflow_dispatch:
 
 permissions:
   id-token: write

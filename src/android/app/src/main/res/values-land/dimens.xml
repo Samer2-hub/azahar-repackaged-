@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Nebula: landscape home screen -->
+    <dimen name="nebula_hero_height">390dp</dimen>
+    <dimen name="nebula_hero_gap">40dp</dimen>
+    <dimen name="nebula_hero_title_size">42sp</dimen>
+    <dimen name="nebula_tile">58dp</dimen>
+    <dimen name="nebula_tile_selected">76dp</dimen>
+</resources>

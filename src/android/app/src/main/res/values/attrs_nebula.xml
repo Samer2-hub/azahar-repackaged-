@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Nebula redesign: theme-level colors used by layouts and styles -->
+    <attr name="nebulaGlassColor" format="color|reference" />
+    <attr name="nebulaGlassStrongColor" format="color|reference" />
+    <attr name="nebulaGlassStrokeColor" format="color|reference" />
+    <attr name="nebulaSheetColor" format="color|reference" />
+    <attr name="nebulaNavColor" format="color|reference" />
+    <attr name="nebulaTrackColor" format="color|reference" />
+</resources>

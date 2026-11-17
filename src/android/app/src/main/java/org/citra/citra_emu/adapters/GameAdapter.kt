@@ -11,11 +11,15 @@ import android.content.pm.ShortcutInfo
 import android.content.pm.ShortcutManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.RenderEffect
+import android.graphics.Shader
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Icon
 import android.net.Uri
+import android.os.Build
 import android.os.SystemClock
 import android.text.TextUtils
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,6 +46,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import java.text.DateFormat
+import java.util.Date
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -111,25 +117,31 @@ class GameAdapter(
      * @param view The card representing the game the user wants to play.
      */
     override fun onClick(view: View) {
+        launchGame(view, (view.tag as GameViewHolder).game)
+    }
+
+    /**
+     * Launches [game]. Used by list items and by the home screen's Play button.
+     */
+    fun launchGame(view: View, game: Game) {
         // Double-click prevention, using threshold of 1000 ms
         if (SystemClock.elapsedRealtime() - lastClickTime < 1000) {
             return
         }
         lastClickTime = SystemClock.elapsedRealtime()
 
-        val holder = view.tag as GameViewHolder
-        gameExists(holder)
+        gameExists(game)
 
         val preferences =
             PreferenceManager.getDefaultSharedPreferences(CitraApplication.appContext)
         preferences.edit()
             .putLong(
-                holder.game.keyLastPlayedTime,
+                game.keyLastPlayedTime,
                 System.currentTimeMillis()
             )
             .apply()
 
-        val action = HomeNavigationDirections.actionGlobalEmulationActivity(holder.game)
+        val action = HomeNavigationDirections.actionGlobalEmulationActivity(game)
         view.findNavController().navigate(action)
     }
 
@@ -141,7 +153,7 @@ class GameAdapter(
     override fun onLongClick(view: View): Boolean {
         val context = view.context
         val holder = view.tag as GameViewHolder
-        gameExists(holder)
+        gameExists(holder.game)
 
         if (!holder.game.valid) {
             MaterialAlertDialogBuilder(context)
@@ -150,17 +162,17 @@ class GameAdapter(
                 .setPositiveButton(android.R.string.ok, null)
                 .show()
         } else {
-            showAboutGameDialog(context, holder.game, holder, view)
+            showGamePage(view, holder.game)
         }
         return true
     }
 
     // Triggers a library refresh if the user clicks on stale data
-    private fun gameExists(holder: GameViewHolder): Boolean {
-        if (holder.game.isInstalled) {
+    private fun gameExists(game: Game): Boolean {
+        if (game.isInstalled) {
             return true
         }
-        val path = holder.game.path
+        val path = game.path
         val pathUri = path.toUri()
         var gameExists: Boolean
         if (BuildUtil.isGooglePlayBuild || FileUtil.isNativePath(path)) {
@@ -441,7 +453,7 @@ class GameAdapter(
         popup.show()
     }
 
-    private fun translateRegions(regionsString: String): String {
+    fun translateRegions(regionsString: String): String {
         val regions = regionsString.split("|")
 
         var final = ""
@@ -486,12 +498,8 @@ class GameAdapter(
         return final
     }
 
-    private fun showAboutGameDialog(
-        context: Context,
-        game: Game,
-        holder: GameViewHolder,
-        view: View
-    ) {
+    fun showGamePage(view: View, game: Game) {
+        val context = view.context
         val bottomSheetView = inflater.inflate(R.layout.dialog_about_game, null)
 
         val bottomSheetDialog = BottomSheetDialog(context)
@@ -500,16 +508,70 @@ class GameAdapter(
         val insertable = game.isInsertable
         val inserted = insertable && (preferences.getString("insertedCartridge", "") == game.path)
 
+        // Game page: labels reuse the existing (translated) strings without their trailing colon
+        fun label(id: Int): String = context.getString(id).trimEnd(':', ' ', '：')
+
         bottomSheetView.findViewById<TextView>(R.id.about_game_title).text = game.title
-        bottomSheetView.findViewById<TextView>(R.id.about_game_company).text = game.company
-        bottomSheetView.findViewById<TextView>(R.id.about_game_region).text =
-            context.getString(R.string.game_context_region) + " " + translateRegions(game.regions)
+        bottomSheetView.findViewById<TextView>(R.id.about_game_company).apply {
+            text = game.company
+            visibility = if (game.company.isEmpty()) View.GONE else View.VISIBLE
+        }
+        bottomSheetView.findViewById<TextView>(R.id.about_game_region).apply {
+            text = translateRegions(game.regions)
+            visibility = if (game.regions.isEmpty()) View.GONE else View.VISIBLE
+        }
+        bottomSheetView.findViewById<TextView>(R.id.about_game_filetype).apply {
+            text = game.fileType.uppercase()
+            visibility = if (game.fileType.isEmpty()) View.GONE else View.VISIBLE
+        }
+        bottomSheetView.findViewById<TextView>(R.id.about_game_id_label).text =
+            label(R.string.game_context_id)
         bottomSheetView.findViewById<TextView>(R.id.about_game_id).text =
-            context.getString(R.string.game_context_id) + " " + String.format("%016X", game.titleId)
-        bottomSheetView.findViewById<TextView>(R.id.about_game_filename).text =
-            context.getString(R.string.game_context_file) + " " + game.filename
-        bottomSheetView.findViewById<TextView>(R.id.about_game_filetype).text =
-            context.getString(R.string.game_context_type) + " " + game.fileType
+            String.format("%016X", game.titleId)
+        bottomSheetView.findViewById<TextView>(R.id.about_game_filename_label).text =
+            label(R.string.game_context_file)
+        bottomSheetView.findViewById<TextView>(R.id.about_game_filename).text = game.filename
+        val storageText = if (game.isInstalled) {
+            R.string.game_page_installed
+        } else {
+            R.string.game_page_game_file
+        }
+        bottomSheetView.findViewById<TextView>(R.id.about_game_storage).text =
+            context.getString(storageText)
+        val compressedText = if (game.isCompressed) {
+            R.string.game_page_yes
+        } else {
+            R.string.game_page_no
+        }
+        bottomSheetView.findViewById<TextView>(R.id.about_game_compressed).text =
+            context.getString(compressedText)
+
+        val lastPlayed = preferences.getLong(game.keyLastPlayedTime, 0L)
+        bottomSheetView.findViewById<TextView>(R.id.about_game_last_played).text =
+            if (lastPlayed == 0L) {
+                context.getString(R.string.game_page_never)
+            } else {
+                DateUtils.getRelativeTimeSpanString(
+                    lastPlayed,
+                    System.currentTimeMillis(),
+                    DateUtils.MINUTE_IN_MILLIS
+                )
+            }
+        val addedTime = preferences.getLong(game.keyAddedToLibraryTime, 0L)
+        bottomSheetView.findViewById<TextView>(R.id.about_game_added).text =
+            if (addedTime == 0L) {
+                "—"
+            } else {
+                DateFormat.getDateInstance(DateFormat.MEDIUM).format(Date(addedTime))
+            }
+
+        // Nebula: blurred game art behind the header, and a back button
+        val headerArt = bottomSheetView.findViewById<ImageView>(R.id.game_page_art)
+        GameIconUtils.loadGameIcon(activity, game, headerArt)
+        applyArtBlur(headerArt)
+        bottomSheetView.findViewById<MaterialButton>(R.id.game_page_back).setOnClickListener {
+            bottomSheetDialog.dismiss()
+        }
 
         val insertButton = bottomSheetView.findViewById<MaterialButton>(
             R.id.insert_cartridge_button
@@ -534,8 +596,8 @@ class GameAdapter(
         GameIconUtils.loadGameIcon(activity, game, bottomSheetView.findViewById(R.id.game_icon))
 
         bottomSheetView.findViewById<MaterialButton>(R.id.about_game_play).setOnClickListener {
-            val action = HomeNavigationDirections.actionGlobalEmulationActivity(holder.game)
-            view.findNavController().navigate(action)
+            bottomSheetDialog.dismiss()
+            launchGame(view, game)
         }
 
         bottomSheetView.findViewById<TextView>(R.id.about_game_playtime).text =
@@ -552,12 +614,10 @@ class GameAdapter(
                     else -> "${seconds}s"
                 }
 
-                append(
-                    context.getString(R.string.game_context_playtime) +
-                        " " +
-                        readablePlayTime
-                )
+                append(readablePlayTime)
             }
+        bottomSheetView.findViewById<TextView>(R.id.about_game_playtime_label).text =
+            label(R.string.game_context_playtime)
 
         bottomSheetView.findViewById<MaterialButton>(R.id.game_shortcut).setOnClickListener {
             val preferences = PreferenceManager.getDefaultSharedPreferences(context)
@@ -631,7 +691,7 @@ class GameAdapter(
         }
 
         bottomSheetView.findViewById<MaterialButton>(R.id.cheats).setOnClickListener {
-            val action = CheatsFragmentDirections.actionGlobalCheatsFragment(holder.game.titleId)
+            val action = CheatsFragmentDirections.actionGlobalCheatsFragment(game.titleId)
             view.findNavController().navigate(action)
             bottomSheetDialog.dismiss()
         }
@@ -640,8 +700,8 @@ class GameAdapter(
             SettingsActivity.launch(
                 context,
                 SettingsFile.FILE_NAME_CONFIG,
-                String.format("%016X", holder.game.titleId),
-                holder.game.title
+                String.format("%016X", game.titleId),
+                game.title
             )
             bottomSheetDialog.dismiss()
         }
@@ -662,12 +722,12 @@ class GameAdapter(
             compressDecompressButton.setOnClickListener {
                 val shouldCompress = !game.isCompressed
                 val recommendedExt = NativeLibrary.getRecommendedExtension(
-                    holder.game.path,
+                    game.path,
                     shouldCompress
                 )
-                val baseName = holder.game.filename.substringBeforeLast('.')
+                val baseName = game.filename.substringBeforeLast('.')
                 onRequestCompressOrDecompress?.invoke(
-                    holder.game.path,
+                    game.path,
                     "$baseName.$recommendedExt",
                     shouldCompress
                 )
@@ -745,11 +805,30 @@ class GameAdapter(
             dialog.show()
         }
 
+        // Game page: always open at full screen height
+        bottomSheetView.minimumHeight = context.resources.displayMetrics.heightPixels
+
         val bottomSheetBehavior = bottomSheetDialog.getBehavior()
         bottomSheetBehavior.skipCollapsed = true
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
 
         bottomSheetDialog.show()
+    }
+
+    /**
+     * Nebula: blurs game art used as a background. Real blur needs Android 12; older
+     * versions show the art dimmed instead.
+     */
+    fun applyArtBlur(imageView: ImageView) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            val radius = imageView.resources.displayMetrics.density * 40f
+            imageView.setRenderEffect(
+                RenderEffect.createBlurEffect(radius, radius, Shader.TileMode.CLAMP)
+            )
+            imageView.alpha = 0.9f
+        } else {
+            imageView.alpha = 0.35f
+        }
     }
 
     private fun refreshShortcutDialogIcon() {

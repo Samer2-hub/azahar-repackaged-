@@ -32,7 +32,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/notice_text"
-                style="@style/TextAppearance.Material3.TitleLarge"
+                style="@style/TextAppearance.Nebula.TitleLarge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -134,7 +134,7 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_recently_played"
-                style="@style/Widget.Material3.Chip.Suggestion.Elevated"
+                style="@style/Widget.Nebula.Chip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
@@ -143,7 +143,7 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_recently_added"
-                style="@style/Widget.Material3.Chip.Suggestion.Elevated"
+                style="@style/Widget.Nebula.Chip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
@@ -152,7 +152,7 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_installed"
-                style="@style/Widget.Material3.Chip.Suggestion.Elevated"
+                style="@style/Widget.Nebula.Chip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"

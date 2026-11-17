@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Nebula home screen: recently played tiles, a big selected-game area, then the full library -->
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipe_refresh"
     android:layout_width="match_parent"
@@ -8,27 +10,245 @@
     android:background="?attr/colorSurface"
     android:clipToPadding="false">
 
-    <RelativeLayout
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/home_scroll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        android:scrollbars="none">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/notice_text"
-            style="@style/TextAppearance.Material3.BodyLarge"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:padding="@dimen/spacing_large"
-            android:text="@string/empty_gamelist"
-            android:visibility="gone" />
+            android:layout_height="wrap_content">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/grid_games"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            tools:listitem="@layout/card_game" />
+            <!-- Selected game's art, enlarged and blurred, fading into the page -->
+            <ImageView
+                android:id="@+id/hero_art"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/nebula_hero_height"
+                android:importantForAccessibility="no"
+                android:scaleType="centerCrop" />
 
-    </RelativeLayout>
+            <View
+                android:id="@+id/hero_scrim"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/nebula_hero_height"
+                android:background="@drawable/bg_nebula_hero_scrim" />
+
+            <LinearLayout
+                android:id="@+id/home_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="20dp">
+
+                <!-- Header -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextAppearance.Nebula.TitleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/nebula_games"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/games_count"
+                        style="@style/TextAppearance.Nebula.Body"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="18dp"
+                        android:layout_weight="1"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textSize="13sp"
+                        tools:text="8 titles" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/home_search_button"
+                        style="@style/Widget.Nebula.IconButton.Glass"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:contentDescription="@string/home_search"
+                        app:icon="@drawable/ic_nebula_search"
+                        app:iconGravity="textStart"
+                        app:iconSize="20dp" />
+
+                </LinearLayout>
+
+                <!-- Recently played tiles -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/carousel_games"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginEnd="-20dp"
+                    android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false"
+                    android:orientation="horizontal"
+                    android:overScrollMode="never"
+                    android:paddingEnd="20dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_game_tile" />
+
+                <!-- Selected game -->
+                <LinearLayout
+                    android:id="@+id/hero_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/nebula_hero_gap"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/hero_meta"
+                        style="@style/TextAppearance.Nebula.Overline"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        tools:text="Northwind Games · North America" />
+
+                    <TextView
+                        android:id="@+id/hero_title"
+                        style="@style/TextAppearance.Nebula.Hero"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:ellipsize="end"
+                        android:lineSpacingMultiplier="1.0"
+                        android:maxLines="2"
+                        android:textSize="@dimen/nebula_hero_title_size"
+                        tools:text="Sky Harbor" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="22dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/hero_play"
+                            style="@style/Widget.Nebula.Button.Icon"
+                            android:layout_width="150dp"
+                            android:layout_height="52dp"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            android:text="@string/play"
+                            app:icon="@drawable/ic_nebula_play"
+                            app:iconGravity="textStart"
+                            app:iconSize="18dp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/hero_more"
+                            style="@style/Widget.Nebula.IconButton.Glass"
+                            android:layout_width="52dp"
+                            android:layout_height="52dp"
+                            android:layout_marginStart="12dp"
+                            android:contentDescription="@string/nebula_game_page"
+                            app:icon="@drawable/ic_nebula_more"
+                            app:iconGravity="textStart"
+                            app:iconSize="20dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="18dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/hero_playtime"
+                            style="@style/TextAppearance.Nebula.Chip"
+                            android:layout_width="wrap_content"
+                            android:layout_height="32dp"
+                            android:background="@drawable/bg_nebula_glass_pill"
+                            android:drawablePadding="6dp"
+                            android:drawableTint="?attr/colorPrimary"
+                            android:gravity="center_vertical"
+                            android:paddingHorizontal="12dp"
+                            android:singleLine="true"
+                            app:drawableStartCompat="@drawable/ic_nebula_clock_small"
+                            tools:text="12h 34m played" />
+
+                        <TextView
+                            android:id="@+id/hero_last_played"
+                            style="@style/TextAppearance.Nebula.Chip"
+                            android:layout_width="wrap_content"
+                            android:layout_height="32dp"
+                            android:layout_marginStart="8dp"
+                            android:background="@drawable/bg_nebula_glass_pill"
+                            android:drawablePadding="6dp"
+                            android:drawableTint="?attr/colorPrimary"
+                            android:gravity="center_vertical"
+                            android:paddingHorizontal="12dp"
+                            android:singleLine="true"
+                            app:drawableStartCompat="@drawable/ic_nebula_gamepad_small"
+                            tools:text="Played 3 days ago" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- Full library -->
+                <LinearLayout
+                    android:id="@+id/all_games_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="34dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextAppearance.Nebula.Section"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/nebula_all_games" />
+
+                    <TextView
+                        style="@style/TextAppearance.Nebula.Body"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/nebula_recently_played"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/notice_text"
+                    style="@style/TextAppearance.Material3.BodyLarge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="120dp"
+                    android:gravity="center"
+                    android:padding="@dimen/spacing_large"
+                    android:text="@string/empty_gamelist"
+                    android:visibility="gone" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/grid_games"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="-7dp"
+                    android:layout_marginTop="12dp"
+                    android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never"
+                    tools:listitem="@layout/card_game" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

@@ -4,6 +4,8 @@
     <style name="ThemeOverlay.Citra.Dark" parent="">
         <item name="colorSurface">@android:color/black</item>
         <item name="android:colorBackground">@android:color/black</item>
+        <item name="nebulaSheetColor">#FF0C0C10</item>
+        <item name="nebulaNavColor">#FF0E0E12</item>
     </style>
 
 </resources>

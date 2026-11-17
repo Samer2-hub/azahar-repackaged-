@@ -36,7 +36,7 @@
 
         <Button
             android:id="@+id/done_control_config"
-            style="@style/Widget.Material3.Button.ElevatedButton"
+            style="@style/Widget.Nebula.Button.Elevated"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -80,7 +80,7 @@
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/loading_title"
-                        style="@style/TextAppearance.Material3.TitleMedium"
+                        style="@style/TextAppearance.Nebula.TitleMedium"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="viewStart"
@@ -88,7 +88,7 @@
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/loading_text"
-                        style="@style/TextAppearance.Material3.TitleSmall"
+                        style="@style/TextAppearance.Nebula.TitleSmall"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
@@ -105,7 +105,7 @@
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/loading_progress_text"
-                        style="@style/TextAppearance.Material3.LabelSmall"
+                        style="@style/TextAppearance.Nebula.LabelSmall"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"

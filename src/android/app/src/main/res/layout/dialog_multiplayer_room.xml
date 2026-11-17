@@ -15,7 +15,7 @@
             android:id="@+id/textTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:textAppearance="@style/TextAppearance.Nebula.HeadlineSmall"
             android:gravity="center"
             android:paddingBottom="8dp"
             android:textColor="?attr/colorOnSurface" />
@@ -65,7 +65,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            style="@style/Widget.Nebula.TextInputLayout.Dropdown"
             android:id="@+id/prefered_game_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

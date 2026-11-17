@@ -1150,4 +1150,30 @@
     <string name="update_check_channel_stable">Stable</string>
     <string name="update_check_channel_prerelease">Prerelease</string>
 
+
+    <!-- Nebula redesign -->
+    <string name="nebula_games">Games</string>
+    <plurals name="nebula_titles_count">
+        <item quantity="one">%d title</item>
+        <item quantity="other">%d titles</item>
+    </plurals>
+    <string name="nebula_all_games">All games</string>
+    <string name="nebula_recently_played">Recently played</string>
+    <string name="nebula_played">%1$s played</string>
+    <string name="nebula_last_played">Played %1$s</string>
+    <string name="nebula_not_played">Not played yet</string>
+    <string name="nebula_game_page">Game page</string>
+    <string name="nebula_back">Back</string>
+    <string name="game_page_details">Details</string>
+    <string name="game_page_manage">Manage</string>
+    <string name="game_page_last_played">Last played</string>
+    <string name="game_page_added">Added</string>
+    <string name="game_page_never">Never</string>
+    <string name="game_page_storage">Storage</string>
+    <string name="game_page_installed">Installed</string>
+    <string name="game_page_game_file">Game file</string>
+    <string name="game_page_compressed">Compressed</string>
+    <string name="game_page_yes">Yes</string>
+    <string name="game_page_no">No</string>
+
 </resources>
